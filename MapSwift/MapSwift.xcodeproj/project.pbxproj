@@ -15,6 +15,7 @@
 		D2178E3C21EDFF18009255CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2178E3A21EDFF18009255CB /* LaunchScreen.storyboard */; };
 		D2178E4721EDFF18009255CB /* MapSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E4621EDFF18009255CB /* MapSwiftTests.swift */; };
 		D2178E5221EDFF18009255CB /* MapSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E5121EDFF18009255CB /* MapSwiftUITests.swift */; };
+		D2178E6021EE00AF009255CB /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E5F21EE00AF009255CB /* Persona.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D2178E4D21EDFF18009255CB /* MapSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2178E5121EDFF18009255CB /* MapSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSwiftUITests.swift; sourceTree = "<group>"; };
 		D2178E5321EDFF18009255CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2178E5F21EE00AF009255CB /* Persona.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				D2178E2E21EDFF18009255CB /* AppDelegate.swift */,
 				D2178E3021EDFF18009255CB /* ViewController.swift */,
+				D2178E5F21EE00AF009255CB /* Persona.swift */,
 				D2178E3221EDFF18009255CB /* Main.storyboard */,
 				D2178E3821EDFF18009255CB /* Assets.xcassets */,
 				D2178E3A21EDFF18009255CB /* LaunchScreen.storyboard */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2178E6021EE00AF009255CB /* Persona.swift in Sources */,
 				D2178E3721EDFF18009255CB /* MapSwift.xcdatamodeld in Sources */,
 				D2178E3121EDFF18009255CB /* ViewController.swift in Sources */,
 				D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */,
