@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class EmpleadoTableViewController: UITableViewController {
     var empresa = [Persona]()
     
     override func viewDidLoad() {
@@ -41,6 +40,14 @@ class ViewController: UIViewController {
         
         empresa.append(p)
         empresa.append(p2)
+        let cantidad = empresa.reduce(0) { (sueldoNuevo, next) -> Double in
+            return sueldoNuevo + next.sueldo
+        }
+        
+        print("sueldo acumulado = ",cantidad)
+        
+        let filtered = empresa.filter({$0.practicas==true}).map({return $0.nombre})
+        print("Personas en prácticas = ",filtered)
         
     }
 

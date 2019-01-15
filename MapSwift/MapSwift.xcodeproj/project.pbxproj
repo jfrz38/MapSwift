@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29057FE421EE509A003F39ED /* EmpleadoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */; };
 		D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E2E21EDFF18009255CB /* AppDelegate.swift */; };
-		D2178E3121EDFF18009255CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E3021EDFF18009255CB /* ViewController.swift */; };
+		D2178E3121EDFF18009255CB /* EmpladoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E3021EDFF18009255CB /* EmpladoTableViewController.swift */; };
 		D2178E3421EDFF18009255CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2178E3221EDFF18009255CB /* Main.storyboard */; };
 		D2178E3721EDFF18009255CB /* MapSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2178E3521EDFF18009255CB /* MapSwift.xcdatamodeld */; };
 		D2178E3921EDFF18009255CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2178E3821EDFF18009255CB /* Assets.xcassets */; };
@@ -36,9 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpleadoViewCell.swift; sourceTree = "<group>"; };
 		D2178E2B21EDFF18009255CB /* MapSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2178E2E21EDFF18009255CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D2178E3021EDFF18009255CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D2178E3021EDFF18009255CB /* EmpladoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpladoTableViewController.swift; sourceTree = "<group>"; };
 		D2178E3321EDFF18009255CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2178E3621EDFF18009255CB /* MapSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapSwift.xcdatamodel; sourceTree = "<group>"; };
 		D2178E3821EDFF18009255CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,13 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				D2178E2E21EDFF18009255CB /* AppDelegate.swift */,
-				D2178E3021EDFF18009255CB /* ViewController.swift */,
+				D2178E3021EDFF18009255CB /* EmpladoTableViewController.swift */,
 				D2178E5F21EE00AF009255CB /* Persona.swift */,
 				D2178E3221EDFF18009255CB /* Main.storyboard */,
 				D2178E3821EDFF18009255CB /* Assets.xcassets */,
 				D2178E3A21EDFF18009255CB /* LaunchScreen.storyboard */,
 				D2178E3D21EDFF18009255CB /* Info.plist */,
 				D2178E3521EDFF18009255CB /* MapSwift.xcdatamodeld */,
+				29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */,
 			);
 			path = MapSwift;
 			sourceTree = "<group>";
@@ -264,8 +267,9 @@
 			files = (
 				D2178E6021EE00AF009255CB /* Persona.swift in Sources */,
 				D2178E3721EDFF18009255CB /* MapSwift.xcdatamodeld in Sources */,
-				D2178E3121EDFF18009255CB /* ViewController.swift in Sources */,
+				D2178E3121EDFF18009255CB /* EmpladoTableViewController.swift in Sources */,
 				D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */,
+				29057FE421EE509A003F39ED /* EmpleadoViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +496,7 @@
 				D2178E5821EDFF18009255CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2178E5921EDFF18009255CB /* Build configuration list for PBXNativeTarget "MapSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +505,7 @@
 				D2178E5B21EDFF18009255CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2178E5C21EDFF18009255CB /* Build configuration list for PBXNativeTarget "MapSwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +514,7 @@
 				D2178E5E21EDFF18009255CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
