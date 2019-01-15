@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="90" id="dpd-c4-kNK">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="90" id="dpd-c4-kNK" customClass="EmpleadoViewCell" customModule="MapSwift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dpd-c4-kNK" id="VYe-XV-q47">
@@ -59,6 +59,14 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="apellidosLbl" destination="nDK-Cc-CMJ" id="W1W-oP-jaR"/>
+                                    <outlet property="becarioLbl" destination="iPU-Os-WqA" id="lhb-Ei-PGT"/>
+                                    <outlet property="nifLbl" destination="eIO-XT-BFW" id="Rds-PY-2e7"/>
+                                    <outlet property="nombreLbl" destination="ebi-Dn-BUQ" id="qSl-GJ-6nh"/>
+                                    <outlet property="puestoLbl" destination="5w4-2t-j7c" id="l7Q-Lg-3ut"/>
+                                    <outlet property="sueldoLbl" destination="K7m-g7-iFT" id="bnh-T8-6Dl"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -78,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="1839" y="32"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="V5x-If-nVg">
             <objects>
-                <viewController id="olE-kk-3fv" sceneMemberID="viewController">
+                <viewController id="olE-kk-3fv" customClass="SearchViewController" customModule="MapSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ip8-7v-U75"/>
                         <viewControllerLayoutGuide type="bottom" id="0zY-lT-rmi"/>
@@ -104,10 +112,16 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZv-Ri-pQV">
                                 <rect key="frame" x="202" y="89" width="30" height="30"/>
                                 <state key="normal" title="="/>
+                                <connections>
+                                    <action selector="nifIgual:" destination="olE-kk-3fv" eventType="touchUpInside" id="gfS-fH-WOK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tce-dM-iAI">
                                 <rect key="frame" x="203" y="127" width="30" height="30"/>
                                 <state key="normal" title="!="/>
+                                <connections>
+                                    <action selector="nifDistinto:" destination="olE-kk-3fv" eventType="touchUpInside" id="oOp-Cj-JRQ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sueldo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2k-5z-Y9a">
                                 <rect key="frame" x="28" y="201" width="53" height="21"/>
@@ -118,14 +132,23 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaz-M4-LK9">
                                 <rect key="frame" x="202" y="187" width="30" height="30"/>
                                 <state key="normal" title="&lt;"/>
+                                <connections>
+                                    <action selector="sueldoMenor:" destination="olE-kk-3fv" eventType="touchUpInside" id="cHc-rB-7bh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-U2-DlZ">
                                 <rect key="frame" x="202" y="256" width="30" height="30"/>
                                 <state key="normal" title="&gt;"/>
+                                <connections>
+                                    <action selector="sueldoMayor:" destination="olE-kk-3fv" eventType="touchUpInside" id="CQH-zK-FuB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="req-Zz-9x3">
                                 <rect key="frame" x="202" y="223" width="30" height="30"/>
                                 <state key="normal" title="="/>
+                                <connections>
+                                    <action selector="sueldoIgual:" destination="olE-kk-3fv" eventType="touchUpInside" id="dYj-z1-uJ5"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R7O-53-5Y4">
                                 <rect key="frame" x="11" y="237" width="97" height="30"/>
@@ -138,11 +161,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c93-WX-ZgZ">
-                                <rect key="frame" x="11" y="340" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="de1-FN-por">
                                 <rect key="frame" x="20" y="406" width="62" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -154,21 +172,33 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFA-IH-lH0">
-                                <rect key="frame" x="203" y="356" width="30" height="30"/>
-                                <state key="normal" title="&gt;"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zo-wJ-uhK">
-                                <rect key="frame" x="203" y="323" width="30" height="30"/>
+                                <rect key="frame" x="12" y="333" width="30" height="30"/>
                                 <state key="normal" title="="/>
+                                <connections>
+                                    <action selector="esBecario:" destination="olE-kk-3fv" eventType="touchUpInside" id="olg-SH-KB4"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="373-Nj-2Fn">
                                 <rect key="frame" x="202" y="464" width="30" height="30"/>
                                 <state key="normal" title="!="/>
+                                <connections>
+                                    <action selector="nombreDistinto:" destination="olE-kk-3fv" eventType="touchUpInside" id="SlG-gu-W57"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btV-PM-gFW">
                                 <rect key="frame" x="202" y="431" width="30" height="30"/>
                                 <state key="normal" title="="/>
+                                <connections>
+                                    <action selector="nombreIgual:" destination="olE-kk-3fv" eventType="touchUpInside" id="5SR-wQ-X8k"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFA-IH-lH0">
+                                <rect key="frame" x="66" y="333" width="30" height="30"/>
+                                <state key="normal" title="!="/>
+                                <connections>
+                                    <action selector="noEsBecario:" destination="olE-kk-3fv" eventType="touchUpInside" id="xS8-77-Oel"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,15 +212,20 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="nifTxt" destination="bPL-GH-Qzd" id="Jp9-Hj-0nL"/>
+                        <outlet property="nombreTxt" destination="KtU-Kl-fJI" id="gLk-qj-4lf"/>
+                        <outlet property="sueldoTxt" destination="R7O-53-5Y4" id="osB-eR-Wll"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1r7-YP-n5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3498" y="32"/>
         </scene>
-        <!--View Controller-->
+        <!--Result View Controller-->
         <scene sceneID="eT8-34-nZr">
             <objects>
-                <viewController id="QU2-Vj-1f1" sceneMemberID="viewController">
+                <viewController id="QU2-Vj-1f1" customClass="ResultViewController" customModule="MapSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k0h-KK-Ame"/>
                         <viewControllerLayoutGuide type="bottom" id="2vg-6f-YGr"/>
@@ -198,12 +233,154 @@
                     <view key="view" contentMode="scaleToFill" id="00m-d8-TgA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yow-re-h1J">
+                                <rect key="frame" x="20" y="104" width="172" height="30"/>
+                                <state key="normal" title="Comparación de tiempos"/>
+                                <connections>
+                                    <segue destination="52S-nd-fb6" kind="show" id="taJ-aa-GrB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbo-p2-9GF">
+                                <rect key="frame" x="21" y="142" width="175" height="30"/>
+                                <state key="normal" title="Resultados de la consulta"/>
+                                <connections>
+                                    <segue destination="lnN-gG-XKs" kind="show" id="5r8-fx-fMR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sueldos totales = " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wM3-Mb-Rll">
+                                <rect key="frame" x="21" y="200" width="138" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sueldo medio = " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfd-2f-NY4">
+                                <rect key="frame" x="21" y="246" width="124" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="sueldoMedioLbl" destination="Rfd-2f-NY4" id="Mkh-Fp-Mxn"/>
+                        <outlet property="sueldosTotalesLbl" destination="wM3-Mb-Rll" id="bWJ-uY-auL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qmz-XD-W9p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4395" y="32"/>
+        </scene>
+        <!--Resultado Table View Controller-->
+        <scene sceneID="OfC-Zz-uUP">
+            <objects>
+                <tableViewController id="lnN-gG-XKs" customClass="ResultadoTableViewController" customModule="MapSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ybB-FV-Zmf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="tbY-P3-cnY" customClass="ResultadoViewCell" customModule="MapSwift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tbY-P3-cnY" id="ge6-4y-uhu">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jh-zg-Hbo">
+                                            <rect key="frame" x="8" y="0.0" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYD-sy-3H6">
+                                            <rect key="frame" x="8" y="48" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTp-WA-D27">
+                                            <rect key="frame" x="464" y="0.0" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud9-FE-WFa">
+                                            <rect key="frame" x="253" y="48" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A84-pW-UA5">
+                                            <rect key="frame" x="253" y="0.0" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h7-yn-mlN">
+                                            <rect key="frame" x="464" y="48" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="apellidoResLbl" destination="cYD-sy-3H6" id="zpQ-jv-wsc"/>
+                                    <outlet property="becarioResLbl" destination="9h7-yn-mlN" id="bMd-J2-ynH"/>
+                                    <outlet property="nifResLbl" destination="A84-pW-UA5" id="M07-wl-egH"/>
+                                    <outlet property="nombreResLbl" destination="7jh-zg-Hbo" id="0iq-0e-KZD"/>
+                                    <outlet property="puestoResLbl" destination="ge6-4y-uhu" id="2do-bN-pS7"/>
+                                    <outlet property="sueldoResLbl" destination="Ud9-FE-WFa" id="ewM-AM-Prk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lnN-gG-XKs" id="tvo-78-Ipw"/>
+                            <outlet property="delegate" destination="lnN-gG-XKs" id="0jG-Hn-hlQ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8T2-29-coF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5175" y="32"/>
+        </scene>
+        <!--Time View Controller-->
+        <scene sceneID="TCF-us-yrY">
+            <objects>
+                <viewController id="52S-nd-fb6" customClass="TimeViewController" customModule="MapSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tqf-mk-sdX"/>
+                        <viewControllerLayoutGuide type="bottom" id="wKV-Hr-fAj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xZQ-Pt-aHL" customClass="tim">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tiempo con un bucle = " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mW5-qN-aYf">
+                                <rect key="frame" x="20" y="197" width="180" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tiempo con map = " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wB-J5-qBx">
+                                <rect key="frame" x="20" y="123" width="148" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tiempoBucleLbl" destination="mW5-qN-aYf" id="kH3-Ov-VdU"/>
+                        <outlet property="tiempoMapLbl" destination="9wB-J5-qBx" id="68c-dZ-n42"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9K-k1-iWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4395" y="792"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uPf-87-rgK">

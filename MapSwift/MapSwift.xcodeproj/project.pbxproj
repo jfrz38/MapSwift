@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		29057FE421EE509A003F39ED /* EmpleadoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */; };
+		29057FFC21EE63CB003F39ED /* SerachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFB21EE63CB003F39ED /* SerachViewController.swift */; };
+		29057FFE21EE650E003F39ED /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFD21EE650E003F39ED /* ResultViewController.swift */; };
+		2905800021EE6608003F39ED /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFF21EE6608003F39ED /* TimeViewController.swift */; };
+		2905800221EE6771003F39ED /* ResultadoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */; };
+		2905800421EE6789003F39ED /* ResultadoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905800321EE6789003F39ED /* ResultadoViewCell.swift */; };
 		D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E2E21EDFF18009255CB /* AppDelegate.swift */; };
 		D2178E3121EDFF18009255CB /* EmpladoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E3021EDFF18009255CB /* EmpladoTableViewController.swift */; };
 		D2178E3421EDFF18009255CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2178E3221EDFF18009255CB /* Main.storyboard */; };
@@ -38,6 +43,11 @@
 
 /* Begin PBXFileReference section */
 		29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpleadoViewCell.swift; sourceTree = "<group>"; };
+		29057FFB21EE63CB003F39ED /* SerachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerachViewController.swift; sourceTree = "<group>"; };
+		29057FFD21EE650E003F39ED /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		29057FFF21EE6608003F39ED /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
+		2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadoTableViewCell.swift; sourceTree = "<group>"; };
+		2905800321EE6789003F39ED /* ResultadoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadoViewCell.swift; sourceTree = "<group>"; };
 		D2178E2B21EDFF18009255CB /* MapSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2178E2E21EDFF18009255CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2178E3021EDFF18009255CB /* EmpladoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpladoTableViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +122,11 @@
 				D2178E3D21EDFF18009255CB /* Info.plist */,
 				D2178E3521EDFF18009255CB /* MapSwift.xcdatamodeld */,
 				29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */,
+				29057FFB21EE63CB003F39ED /* SerachViewController.swift */,
+				29057FFD21EE650E003F39ED /* ResultViewController.swift */,
+				29057FFF21EE6608003F39ED /* TimeViewController.swift */,
+				2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */,
+				2905800321EE6789003F39ED /* ResultadoViewCell.swift */,
 			);
 			path = MapSwift;
 			sourceTree = "<group>";
@@ -265,9 +280,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2905800421EE6789003F39ED /* ResultadoViewCell.swift in Sources */,
+				29057FFC21EE63CB003F39ED /* SerachViewController.swift in Sources */,
+				2905800021EE6608003F39ED /* TimeViewController.swift in Sources */,
 				D2178E6021EE00AF009255CB /* Persona.swift in Sources */,
+				29057FFE21EE650E003F39ED /* ResultViewController.swift in Sources */,
 				D2178E3721EDFF18009255CB /* MapSwift.xcdatamodeld in Sources */,
 				D2178E3121EDFF18009255CB /* EmpladoTableViewController.swift in Sources */,
+				2905800221EE6771003F39ED /* ResultadoTableViewCell.swift in Sources */,
 				D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */,
 				29057FE421EE509A003F39ED /* EmpleadoViewCell.swift in Sources */,
 			);

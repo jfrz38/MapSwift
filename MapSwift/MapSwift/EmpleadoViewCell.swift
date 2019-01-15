@@ -12,6 +12,17 @@ class EmpleadoViewCell: UITableViewCell {
     
     //MARK: propiedades
     
+    @IBOutlet weak var nombreLbl: UILabel!
+    
+    @IBOutlet weak var apellidosLbl: UILabel!
+    
+    @IBOutlet weak var nifLbl: UILabel!
+    
+    @IBOutlet weak var sueldoLbl: UILabel!
+    
+    @IBOutlet weak var puestoLbl: UILabel!
+    
+    @IBOutlet weak var becarioLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
