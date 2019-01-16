@@ -8,9 +8,12 @@
 
 import UIKit
 
+var resultadoBusqueda = [Persona]()
+var tiempoMap : Double = 0.0
+var tiempoBucle : Double = 0.0
+var empresa = [Persona]()
+
 class EmpleadoTableViewController: UITableViewController {
-    
-    var empresa = [Persona]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

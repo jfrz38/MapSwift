@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29057FE421EE509A003F39ED /* EmpleadoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */; };
-		29057FFC21EE63CB003F39ED /* SerachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFB21EE63CB003F39ED /* SerachViewController.swift */; };
+		29057FFC21EE63CB003F39ED /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFB21EE63CB003F39ED /* SearchViewController.swift */; };
 		29057FFE21EE650E003F39ED /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFD21EE650E003F39ED /* ResultViewController.swift */; };
 		2905800021EE6608003F39ED /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFF21EE6608003F39ED /* TimeViewController.swift */; };
 		2905800221EE6771003F39ED /* ResultadoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */; };
@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpleadoViewCell.swift; sourceTree = "<group>"; };
-		29057FFB21EE63CB003F39ED /* SerachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerachViewController.swift; sourceTree = "<group>"; };
+		29057FFB21EE63CB003F39ED /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		29057FFD21EE650E003F39ED /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		29057FFF21EE6608003F39ED /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadoTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				D2178E3D21EDFF18009255CB /* Info.plist */,
 				D2178E3521EDFF18009255CB /* MapSwift.xcdatamodeld */,
 				29057FE321EE509A003F39ED /* EmpleadoViewCell.swift */,
-				29057FFB21EE63CB003F39ED /* SerachViewController.swift */,
+				29057FFB21EE63CB003F39ED /* SearchViewController.swift */,
 				29057FFD21EE650E003F39ED /* ResultViewController.swift */,
 				29057FFF21EE6608003F39ED /* TimeViewController.swift */,
 				2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */,
@@ -281,7 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2905800421EE6789003F39ED /* ResultadoViewCell.swift in Sources */,
-				29057FFC21EE63CB003F39ED /* SerachViewController.swift in Sources */,
+				29057FFC21EE63CB003F39ED /* SearchViewController.swift in Sources */,
 				2905800021EE6608003F39ED /* TimeViewController.swift in Sources */,
 				D2178E6021EE00AF009255CB /* Persona.swift in Sources */,
 				29057FFE21EE650E003F39ED /* ResultViewController.swift in Sources */,
