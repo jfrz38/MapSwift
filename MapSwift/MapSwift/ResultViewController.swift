@@ -14,4 +14,15 @@ internal class ResultViewController : UIViewController, UITextFieldDelegate, UII
 
     @IBOutlet weak var sueldoMedioLbl: UILabel!
     
+    override func viewDidLoad(){
+        super.viewDidLoad()
+    
+        if (!mediaSeleccionada){
+            sueldoMedioLbl.hidden = true
+        }
+        if(!totalSeleccionado){
+            sueldosTotalesLbl.hidden = true
+        }
+    }
+    
 }

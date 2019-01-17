@@ -12,6 +12,8 @@ var resultadoBusqueda = [Persona]()
 var tiempoMap : Double = 0.0
 var tiempoBucle : Double = 0.0
 var empresa = [Persona]()
+var mediaSeleccionada = false
+var totalSeleccionado = false
 
 class EmpleadoTableViewController: UITableViewController {
     
@@ -21,7 +23,7 @@ class EmpleadoTableViewController: UITableViewController {
         
         inicializar()
         
-        pruebas()
+        /*pruebas()
         
         let pr_NIF = pruebas_NIF(empresa,accion: "!=",nif: "NIF")
         print("pr_NIF = ",pr_NIF)
@@ -29,6 +31,7 @@ class EmpleadoTableViewController: UITableViewController {
         print("pr_sueldo = ",pr_sueldo)
         let pr_practica = pruebas_practicas(pr_sueldo, accion: "no")
         print("pr_practica = ",pr_practica)
+         */
         
     }
     
@@ -38,6 +41,47 @@ class EmpleadoTableViewController: UITableViewController {
     }
     
     func inicializar(){
+        
+        //Crear personas aleatorias en la empresa
+        
+        //Tres prototipos de personas: Jefe - empleado - becario
+        
+        //Generar X personas de forma aleatoria: 1 = jefe, 2 = empleado 3 = becario
+        
+        var numNif = 1
+        var numNombreJefe = 1
+        var numNombreEmpleado = 1
+        var numNombreBecario = 1
+        for _ in 0...100{
+            let n = Int(arc4random_uniform(UInt32(101-1))+UInt32(1))
+            var p: Persona!
+            if(n < 10){
+                //Crear jefe
+                p = Persona(NIF: "NIF"+String(numNif),nombre: "Jefe"+String(numNombreJefe),apellido: "jefazo",sueldo: 2600,puesto: "jefazo",practicas: false)
+                numNombreJefe+=1
+            }else if(n < 75){
+                //Crear empleado
+                p = Persona(NIF: "NIF"+String(numNif),nombre: "Empleado"+String(numNombreEmpleado),apellido: "currante",sueldo: 1200,puesto: "empleado",practicas: false)
+                //Incrementar o no el contador (para que haya personas que se llamen igual)
+                let r = Int(arc4random_uniform(UInt32(5-1))+UInt32(1))
+                // 25% de que se repita un nombre
+                if(r != 1){
+                    numNombreEmpleado+=1
+                }
+            }else{
+                //Crear becario
+                p = Persona(NIF: "NIF"+String(numNif),nombre: "Becario"+String(numNombreBecario),apellido: "beca",sueldo: 800,puesto: "becario",practicas: true)
+                let r = Int(arc4random_uniform(UInt32(5-1))+UInt32(1))
+                // 25% de que se repita un nombre
+                if(r != 1){
+                    numNombreBecario+=1
+                }
+            }
+            empresa.append(p)
+            numNif+=1
+        }
+        
+        /*
         let p = Persona(NIF: "NIF",nombre: "nombre",apellido: "apellidos",sueldo: 2600,puesto: "jefazo",practicas: false)
         let p2 = Persona(NIF: "NIF2",nombre: "nombre2",apellido: "apellidos2",sueldo: 2600,puesto: "mindundi",practicas: true)
         let p3 = Persona(NIF: "NIF3",nombre: "nombre3",apellido: "apellidos3",sueldo: 100,puesto: "xd",practicas: true)
@@ -47,7 +91,7 @@ class EmpleadoTableViewController: UITableViewController {
         empresa.append(p2)
         empresa.append(p3)
         empresa.append(p4)
-        
+        */
         //Medir tiempos
         
         //Iterar
@@ -58,24 +102,23 @@ class EmpleadoTableViewController: UITableViewController {
         }
         let finIterar = NSDate()
         let diferencia = (finIterar.timeIntervalSinceDate(inicioIterar) * 1000)
-        print("fin iterar = ",diferencia)
+        print("Tiempo iterativo para insertar = ",diferencia)
         
         //Map
         let inicioMap = NSDate()
-        var coleccionMap = [Persona]()
-        coleccionMap = empresa.map({$0})
+        let _ = empresa.map({$0})
         let finMap = NSDate()
         let diferencia2 = (finMap.timeIntervalSinceDate(inicioMap) * 1000)
-        print("fin map = ",diferencia2)
+        print("Tiempo mapa para insertar = ",diferencia2)
         
         
         
-        let resultCollection = empresa.map({
+        /*let resultCollection = empresa.map({
             (persona) -> String in
             return persona.nombre
-        })
+        })*/
         
-        print("Array inicial = ",resultCollection)
+        //print("Array inicial = ",empresa.map({$0.NIF}))
         
         //Mostrar todos los NIF de la empresa
         //let nifCollection = empresa.map({$0.NIF})

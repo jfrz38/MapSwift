@@ -131,7 +131,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             return
         }
         
+        //Tiempo
+        let inicioTiempoMap = NSDate()
+        //Búsqueda Map
         let resultadosFinalesMap = busquedaMap()
+        let finTiempoMap = NSDate()
+        let diferenciaMap = (finTiempoMap.timeIntervalSinceDate(inicioTiempoMap) * 1000)
+        print("Tiempo búsqueda map = ",diferenciaMap)
         
         print("Resultado = ",resultadosFinalesMap.map({$0.nombre}))
         
