@@ -207,12 +207,21 @@
                     <navigationItem key="navigationItem" id="nza-Xk-Mvw">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="cz2-LA-kbS">
                             <connections>
-                                <segue destination="QU2-Vj-1f1" kind="show" id="QM0-1i-YqS"/>
+                                <segue destination="QU2-Vj-1f1" kind="show" identifier="toResult" id="Ecb-m9-ZdQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnBecario" destination="6zo-wJ-uhK" id="DKj-Cy-p8U"/>
+                        <outlet property="btnNifIgual" destination="qZv-Ri-pQV" id="Mq1-fw-jpv"/>
+                        <outlet property="btnNifNoIgual" destination="Tce-dM-iAI" id="2NG-H2-0BK"/>
+                        <outlet property="btnNoBecario" destination="BFA-IH-lH0" id="Ofn-62-SCw"/>
+                        <outlet property="btnNombreIgual" destination="btV-PM-gFW" id="pGU-ta-eqt"/>
+                        <outlet property="btnNombreNoIgual" destination="373-Nj-2Fn" id="xUK-Bn-CWI"/>
+                        <outlet property="btnSueldoIgual" destination="req-Zz-9x3" id="kef-IE-4AD"/>
+                        <outlet property="btnSueldoMayor" destination="Xph-U2-DlZ" id="jCH-t1-72L"/>
+                        <outlet property="btnSueldoMenor" destination="kaz-M4-LK9" id="jCX-Pr-Sqb"/>
                         <outlet property="nifTxt" destination="bPL-GH-Qzd" id="Jp9-Hj-0nL"/>
                         <outlet property="nombreTxt" destination="KtU-Kl-fJI" id="gLk-qj-4lf"/>
                         <outlet property="sueldoTxt" destination="R7O-53-5Y4" id="osB-eR-Wll"/>

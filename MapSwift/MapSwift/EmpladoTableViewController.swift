@@ -75,29 +75,32 @@ class EmpleadoTableViewController: UITableViewController {
             return persona.nombre
         })
         
-        print("resultado = ",resultCollection)
+        print("Array inicial = ",resultCollection)
         
         //Mostrar todos los NIF de la empresa
-        let nifCollection = empresa.map({$0.NIF})
-        print("NIF = ",nifCollection)
+        //let nifCollection = empresa.map({$0.NIF})
+        //print("Todos los NIF = ",nifCollection)
         
-        //Filtro según edad
-        let filtroEdad = empresa.filter({$0.sueldo > 10 && $0.nombre == "nombre"}).map({return $0.nombre})
-        print("filtro edad = ",filtroEdad)
+        //Filtro edad y nombre
+        //let filtroEdad = empresa.filter({$0.sueldo > 10 && $0.nombre == "nombre"}).map({return $0.nombre})
+        //print("filtro edad  > 10 y nombre = nombre : ",filtroEdad)
         
         //Sumatoria
+        /*
         let reduceSuma = empresa.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
             return sueldoActual+sueldoSiguiente.sueldo
         }
-        print("reduce suma = ",reduceSuma)
+        print("Sueldo total = ",reduceSuma)
         print("Sueldo medio = ",(reduceSuma/Double(empresa.count)))
+         */
         
         //Duplicar valor
-        let duplicarSueldo = empresa.map({$0.sueldo*2})
-        print("Sueldos dobles = ",duplicarSueldo)
-        print("Sueldos = ",empresa.map({$0.sueldo}))
+        //let duplicarSueldo = empresa.map({$0.sueldo*2})
+        //print("Sueldos dobles = ",duplicarSueldo)
+        //print("Sueldos = ",empresa.map({$0.sueldo}))
         
         //Pruebas con diccionario
+        /*
         let milesToPoint = ["point1":120.0,"point2":50.0,"point3":70.0]
         let kmToPoint = milesToPoint.map { name,miles in miles * 1.6093 }
         print("km 1 = ",milesToPoint)
@@ -108,7 +111,9 @@ class EmpleadoTableViewController: UITableViewController {
             return key.capitalizedString+" xd"
         }
         print("mayúsculas = ",returnMap)
+        */
         
+        /*
         //Filter en diccionario
         let filterDiccionario = bookAmount.filter{(key,value) -> Bool in
             value > 20
@@ -117,14 +122,17 @@ class EmpleadoTableViewController: UITableViewController {
         //Más corto
         let filtroDiccionario2 = bookAmount.filter{$1 > 50} //$0 es key y $1 value
         print("filtro diccionario 2 = ",filtroDiccionario2)
+        */
         
         //Encadenar métodos
         //Sumar sueldos únicamente de las prácticas
+        /*
         let sueldoPracticas = empresa.filter({$0.practicas == true}).map({return $0}).reduce(0){
             (sueldoActual,sueldoSiguiente)-> Double in
             return sueldoActual + sueldoSiguiente.sueldo
         }
         print("sueldo total prácticas = ",sueldoPracticas)
+         */
         
     }
     

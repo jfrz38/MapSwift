@@ -26,21 +26,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     var sueldoInsertado: Double!
     var nombreInsertado: String!
     
-    override func viewDidLoad(){
-        super.viewDidLoad()
-        
-        opciones.append(nifIgual)
-        opciones.append(nifNoIgual)
-        opciones.append(sueldoMayor)
-        opciones.append(sueldoMenor)
-        opciones.append(sueldoIgual)
-        opciones.append(becarioSi)
-        opciones.append(becarioNo)
-        opciones.append(nombreIgual)
-        opciones.append(nombreNoIgual)
-        
-    }
-    
     //Mark: properties
     
     @IBOutlet weak var nifTxt: UITextField!
@@ -49,78 +34,155 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     @IBOutlet weak var nombreTxt: UITextField!
     
+    @IBOutlet weak var btnNifIgual: UIButton!
+    @IBOutlet weak var btnNifNoIgual: UIButton!
+    @IBOutlet weak var btnSueldoMenor: UIButton!
+    @IBOutlet weak var btnSueldoIgual: UIButton!
+    @IBOutlet weak var btnSueldoMayor: UIButton!
+    @IBOutlet weak var btnBecario: UIButton!
+    @IBOutlet weak var btnNoBecario: UIButton!
+    @IBOutlet weak var btnNombreIgual: UIButton!
+    @IBOutlet weak var btnNombreNoIgual: UIButton!
+    
+    //Visualizadores
+    
+    //TODO : Hacer Editing Changed de los campos de texto, cada vez que cambien su valor se comprueba si es
+    //vacío o no para poner los botones correspondientes en .disable = true o no
+    //P. ej: Si el campo nombre está vacío, los botones del nombre estarán disabled y a false
+    //Si no está vacío se mostrarán disable = false
+    //dependiendo de si están en false o no se mostrará alpha 0.25 0 1 (al ponerse en false al dejar
+    //el campo de texto vacío no debería haber problema)
     
     //Mark: functions
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        
+        opciones.append(nifIgual)   //0
+        opciones.append(nifNoIgual) //1
+        opciones.append(sueldoMayor)//2
+        opciones.append(sueldoMenor)//3
+        opciones.append(sueldoIgual)//4
+        opciones.append(becarioSi)  //5
+        opciones.append(becarioNo)  //6
+        opciones.append(nombreIgual)//7
+        opciones.append(nombreNoIgual)//8
+        
+        btnNifIgual.alpha = 0.25
+        btnNifNoIgual.alpha = 0.25
+        
+    }
 
     @IBAction func nifIgual(sender: UIButton) {
-        nifIgual = true
-        nifNoIgual = false
+        opciones[0] = true  //NIF igual
+        opciones[1] = false //NIF distinto
+        btnNifIgual.alpha = 1
+        btnNifNoIgual.alpha = 0.25
     }
 
     @IBAction func nifDistinto(sender: UIButton) {
-        nifIgual = false
-        nifNoIgual = true
+        opciones[0] = false //NIF igual
+        opciones[1] = true  //NIF distinto
+        btnNifIgual.alpha = 0.25
+        btnNifNoIgual.alpha = 1
     }
 
     @IBAction func sueldoMenor(sender: UIButton) {
-        sueldoMenor = true
-        sueldoIgual = false
-        sueldoMayor = false
+        opciones[3] = true  //Sueldo menor
+        opciones[4] = false //Sueldo igual
+        opciones[2] = false //Sueldo mayor
     }
     
     @IBAction func sueldoIgual(sender: UIButton) {
-        sueldoMenor = false
-        sueldoIgual = true
-        sueldoMayor = false
+        opciones[3] = false //Sueldo menor
+        opciones[4] = true  //Sueldo igual
+        opciones[2] = false //Sueldo mayor
     }
     
     @IBAction func sueldoMayor(sender: UIButton) {
-        sueldoMenor = false
-        sueldoIgual = false
-        sueldoMayor = true
+        opciones[3] = false //Sueldo menor
+        opciones[4] = false //Sueldo igual
+        opciones[2] = true  //Sueldo mayor
     }
     
     @IBAction func esBecario(sender: UIButton) {
-        becarioSi = true
-        becarioNo = false
+        opciones[5] = true  //Becario
+        opciones[6] = false //No becario
     }
     
     @IBAction func noEsBecario(sender: UIButton) {
-        becarioSi = false
-        becarioNo = true
+        opciones[5] = false //Becario
+        opciones[6] = true  //No becario
     }
     
     @IBAction func nombreIgual(sender: UIButton) {
-        nombreIgual = true
-        nombreNoIgual = false
+        opciones[7] = true  //Nombre igual
+        opciones[8] = false //nombre diferente
     }
     
     @IBAction func nombreDistinto(sender: UIButton) {
-        nombreIgual = false
-        nombreNoIgual = true
+        opciones[7] = false //Nombre igual
+        opciones[8] = true  //Nombre diferente
     }
 
     //Pulsar la lupa para realizar búsqueda
-    func busqueda(){
-        var resultadosBusqueda = empresa
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier != "toResult") {
+            return
+        }
         
+        let resultadosFinalesMap = busquedaMap()
+        
+        print("Resultado = ",resultadosFinalesMap.map({$0.nombre}))
+        
+    }
+    
+    //Realiza la búsqueda utilizando Map
+    func busquedaMap() -> [Persona]{
+        
+        //Comprobar los campos de texto
+        if(nifTxt.text! == ""){
+            opciones[0] = false
+            opciones[1] = false
+        }else{
+            nifInsertado = nifTxt.text!
+        }
+        
+        if(nombreTxt.text! == ""){
+            opciones[7] = false
+            opciones[8] = false
+        }else{
+            nombreInsertado = nombreTxt.text!
+        }
+        
+        if(sueldoTxt.text! == "" && getSueldoTotal == false && getSueldoMedio == false){
+            opciones[2] = false
+            opciones[3] = false
+            opciones[4] = false
+        }else{
+            //TODO : Comprobar si es un número o no
+            sueldoInsertado = Double(sueldoTxt.text!)
+        }
+        var j = 0
+        for op in opciones{
+            if(op == true){
+                break
+            }
+            if(opciones.count-1 == j){
+                //Devuelve un array vacío
+                //TODO indicar que no se ha seleccionado nada
+                return [Persona]()
+            }
+            j+=1
+        }
+        var resultadosBusqueda = empresa
         var i = 0
         for _ in opciones{
             if(opciones[i]==true){
-             resultadosBusqueda = metodoPorPosicion(i,entrada: resultadosBusqueda)
+             resultadosBusqueda = metodoPorPosicionMap(i,entrada: resultadosBusqueda)
             }
             i+=1
         }
-        
-        /*
- 
-         //Sumatoria
-         let reduceSuma = empresa.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
-         return sueldoActual+sueldoSiguiente.sueldo
-         }
-         print("reduce suma = ",reduceSuma)
-         print("Sueldo medio = ",(reduceSuma/Double(empresa.count)))
- */
         
         if(getSueldoTotal || getSueldoMedio){
             //Calcular sueldo medio o total de la opción elegida
@@ -133,10 +195,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
         }
         
+        return resultadosBusqueda
+        
     }
     
     //Accede al método según la posición que esté true
-    func metodoPorPosicion(pos:Int, entrada:[Persona]) -> [Persona]{
+    func metodoPorPosicionMap(pos:Int, entrada:[Persona]) -> [Persona]{
         
         switch pos {
         case 0:
@@ -170,10 +234,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             print("error")
             return entrada
         }
-        
-    }
-    //Realiza la búsqueda utilizando Map
-    func busquedaMap(){
         
     }
     
