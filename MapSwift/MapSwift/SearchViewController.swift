@@ -8,6 +8,9 @@
 
 import UIKit
 
+var tiempoMedioMapa : Double = 0.0
+var tiempoMedioIterar : Double = 0.0
+
 class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     var nifIgual = false
@@ -71,6 +74,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         btnNifIgual.alpha = 0.25
         btnNifNoIgual.alpha = 0.25
         
+        getSueldoTotal = true
+        
     }
 
     @IBAction func nifIgual(sender: UIButton) {
@@ -132,31 +137,59 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }
         
         comprobarBotones()
-        //Tiempo
-        let inicioTiempoMap = NSDate()
-        //Búsqueda Map
-        let resultadosFinalesMap = busquedaMap()
-        let finTiempoMap = NSDate()
-        let diferenciaMap = (finTiempoMap.timeIntervalSinceDate(inicioTiempoMap) * 1000)
-        print("Tiempo búsqueda map = ",diferenciaMap)
         
-        //print("Resultado map = ",resultadosFinalesMap.map({$0.nombre}))
+        var arrayTiempoMedioMap = [Double]()
+        var arrayTiempoMedioIterar = [Double]()
+        
+        for _ in 1...10{
+            //Tiempo
+            let inicioTiempoMap = NSDate()
+            //Búsqueda Map
+            let resultadosFinalesMap = busquedaMap()
+            let finTiempoMap = NSDate()
+            let diferenciaMap = (finTiempoMap.timeIntervalSinceDate(inicioTiempoMap) * 1000)
+            //print("Tiempo búsqueda map = ",diferenciaMap)
+            arrayTiempoMedioMap.append(diferenciaMap)
+            resultadoBusqueda = resultadosFinalesMap
+        }
+        
+        //Valor medio de los resultados
+        var aux = 0.0
+        for i in arrayTiempoMedioMap{
+            aux+=i
+        }
+        tiempoMedioMapa = aux/Double(arrayTiempoMedioMap.count)
+        print("Tiempo búsqueda medio map = ",tiempoMedioMapa)
         
         
-        //Tiempo iterativo
-        let inicioTiempoIterativo = NSDate()
-        //Búsqueda iterativa
-        let resultadosFinalesIterar = busquedaBucle()
-        let finTiempoIterativo = NSDate()
-        let diferenciaIterativa = (finTiempoIterativo.timeIntervalSinceDate(inicioTiempoIterativo) * 1000)
-        print("Tiempo búsqueda iterativa = ",diferenciaIterativa)
+        for _ in 1...10{
+            //Tiempo iterativo
+            let inicioTiempoIterativo = NSDate()
+            //Búsqueda iterativa
+            let resultadosFinalesIterar = busquedaBucle()
+            let finTiempoIterativo = NSDate()
+            let diferenciaIterativa = (finTiempoIterativo.timeIntervalSinceDate(inicioTiempoIterativo) * 1000)
+            //print("Tiempo búsqueda iterativa = ",diferenciaIterativa)
+            arrayTiempoMedioIterar.append(diferenciaIterativa)
+            resultadoBusqueda = resultadosFinalesIterar
+        }
+        
+        aux = 0.0
+        for i in arrayTiempoMedioIterar{
+            aux+=i
+        }
+        tiempoMedioIterar = aux/Double(arrayTiempoMedioIterar.count)
+        print("Tiempo búsqueda medio iterar = ",tiempoMedioIterar)
+        
+        tiemposAtributos()
         //print("Resultados iterativo = ",resultadosFinalesIterar.map({$0.nombre}))
-        print("Nº resultados = ",resultadosFinalesMap.count)
-        if(resultadosFinalesMap.count == resultadosFinalesIterar.count){
+        
+        /*if(resultadosFinalesMap.count == resultadosFinalesIterar.count){
+            print("Nº resultados = ",resultadosFinalesMap.count)
             var i = 0
             var distinto = false
             for p in resultadosFinalesMap{
-                if(p.NIF != resultadosFinalesMap[i].nombre){
+                if(p.NIF != resultadosFinalesMap[i].NIF){
                     print("No coincide")
                     distinto = true //hay uno distinto
                     break
@@ -170,7 +203,48 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
         }else{
             print("No coincide")
+        }*/
+        
+        //print("Resultados iterativo: ",resultadosFinalesIterar.map({$0.NIF}))
+        //print("Resultados map: ",resultadosFinalesMap.map({$0.NIF}))
+    }
+    
+    func tiemposAtributos(){
+        //Mapa
+        var tiempoMedioStringMap = [Double]()
+        for _ in 1...10{
+            let inicioTiempoMap = NSDate()
+            var _ = resultadoBusqueda.map({$0.nombre+" "+$0.apellido})
+            let finTiempoMap = NSDate()
+            let diferenciaMap = (finTiempoMap.timeIntervalSinceDate(inicioTiempoMap) * 1000)
+            tiempoMedioStringMap.append(diferenciaMap)
         }
+        var aux = 0.0
+        for i in tiempoMedioStringMap{
+            aux+=i
+        }
+        print("Tiempo medio string map = ",aux/Double(tiempoMedioStringMap.count))
+        
+        //Iterativo
+        var tiempoMedioStringIterativo = [Double]()
+        for _ in 1...10{
+            let inicioTiempoIterativo = NSDate()
+            //Búsqueda iterativa
+            var atributosIterativo = [String]()
+            for rb in resultadoBusqueda{
+                atributosIterativo.append(rb.nombre+" "+rb.apellido)
+            }
+            let finTiempoIterativo = NSDate()
+            let diferenciaIterativa = (finTiempoIterativo.timeIntervalSinceDate(inicioTiempoIterativo) * 1000)
+            tiempoMedioStringIterativo.append(diferenciaIterativa)
+
+        }
+        aux = 0.0
+        for i in tiempoMedioStringIterativo{
+            aux+=i
+        }
+        print("Tiempo medio string iterativo = ",aux/Double(tiempoMedioStringIterativo.count))
+
     }
     
     func comprobarBotones(){
@@ -230,8 +304,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             let resultadoFinal = resultadosBusqueda.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
                 return sueldoActual+sueldoSiguiente.sueldo
             }
+            if(getSueldoMedio){
+                let sueldoMedio = resultadoFinal/Double(resultadosBusqueda.count)
+            }
             
-            let sueldoMedio = resultadoFinal/Double(resultadosBusqueda.count)
             
         }
         
@@ -283,12 +359,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var filtroNIF:[Persona]
         
         if(accion == "="){
-            filtroNIF = entrada.filter({$0.NIF == nif}).map({return $0})
+            filtroNIF = entrada.filter({$0.NIF == nif})
             //Filtro contains
-            //filtroNIF = entrada.filter({$0.NIF.containsString("NIF")}).map({return $0})
+            //filtroNIF = entrada.filter({$0.NIF.containsString("NIF")})
         }else{
             //Accion = !=
-            filtroNIF = entrada.filter({$0.NIF != nif}).map({return $0})
+            filtroNIF = entrada.filter({$0.NIF != nif})
             
         }
         
@@ -300,12 +376,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var filtroSueldo:[Persona]
         
         if(accion == "<"){
-            filtroSueldo = entrada.filter({$0.sueldo < sueldo}).map({return $0})
+            filtroSueldo = entrada.filter({$0.sueldo < sueldo})
         }else if(accion == "="){
-            filtroSueldo = entrada.filter({$0.sueldo == sueldo}).map({return $0})
+            filtroSueldo = entrada.filter({$0.sueldo == sueldo})
         }else{
             //Accion: >
-            filtroSueldo = entrada.filter({$0.sueldo > sueldo}).map({return $0})
+            filtroSueldo = entrada.filter({$0.sueldo > sueldo})
         }
         return filtroSueldo
     }
@@ -314,10 +390,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var filtroPracticas: [Persona]
         
         if (accion){
-            filtroPracticas = entrada.filter({$0.practicas == true}).map({return $0})
+            filtroPracticas = entrada.filter({$0.practicas == true})
         }else{
             //accion == false
-            filtroPracticas = entrada.filter({$0.practicas == false}).map({return $0})
+            filtroPracticas = entrada.filter({$0.practicas == false})
         }
         
         return filtroPracticas
@@ -327,14 +403,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func filtro_nombre(entrada:[Persona],accion: String, nombre:String) -> [Persona]{
         var filtroNombre:[Persona]
         if(accion == "="){
-            filtroNombre = entrada.filter({$0.nombre == nombre}).map({return $0})
+            filtroNombre = entrada.filter({$0.nombre == nombre})
         }else if(accion == "!="){
-            filtroNombre = entrada.filter({$0.nombre != nombre}).map({return $0})
+            filtroNombre = entrada.filter({$0.nombre != nombre})
         }else if(accion == "contenga"){
-            filtroNombre = entrada.filter({$0.nombre.containsString(nombre)}).map({return $0})
+            filtroNombre = entrada.filter({$0.nombre.containsString(nombre)})
         }else{
             //accion = no contenga
-            filtroNombre = entrada.filter({!$0.nombre.containsString(nombre)}).map({return $0})
+            filtroNombre = entrada.filter({!$0.nombre.containsString(nombre)})
         }
         
         return filtroNombre
@@ -362,7 +438,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             j+=1
         }
         
-        var resultadosBusqueda = empresa
+        var resultadosBusqueda = empresaIterar
         var i = 0
         for _ in opciones{
             if(opciones[i]==true){
@@ -374,8 +450,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if(getSueldoTotal || getSueldoMedio){
             //Calcular sueldo medio o total de la opción elegida
             //Se realiza en el mismo if porque para calcular la media se necesita el total
+            var sueldoTotal:Double = 0
+            for rb in resultadosBusqueda{
+                sueldoTotal += rb.sueldo
+            }
+            if(getSueldoMedio){
+                let sueldoMedio = sueldoTotal/Double(resultadosBusqueda.count)
+            }
             
-            //let sueldoMedio = resultadoFinal/Double(resultadosBusqueda.count)
             
         }
         

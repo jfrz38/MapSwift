@@ -11,9 +11,14 @@ import UIKit
 var resultadoBusqueda = [Persona]()
 var tiempoMap : Double = 0.0
 var tiempoBucle : Double = 0.0
+var tiempoStringMap : Double = 0.0
+var tiempoStringBucle : Double = 0.0
 var empresa = [Persona]()
+var empresaIterar = [Persona]()
 var mediaSeleccionada = false
 var totalSeleccionado = false
+var sueldoTotalMap : Double = 0.0
+var sueltoTotalIterativo : Double = 0.0
 
 class EmpleadoTableViewController: UITableViewController {
     
@@ -52,7 +57,7 @@ class EmpleadoTableViewController: UITableViewController {
         var numNombreJefe = 1
         var numNombreEmpleado = 1
         var numNombreBecario = 1
-        for _ in 0...100{
+        for _ in 0...100000{
             let n = Int(arc4random_uniform(UInt32(101-1))+UInt32(1))
             var p: Persona!
             if(n < 10){
@@ -81,6 +86,12 @@ class EmpleadoTableViewController: UITableViewController {
             numNif+=1
         }
         
+        for p in empresa{
+            let persona = Persona(NIF:p.NIF,nombre:p.nombre,apellido:p.apellido
+                ,sueldo:p.sueldo,puesto:p.puesto,practicas: p.practicas)
+            empresaIterar.append(persona)
+        }
+        
         /*
         let p = Persona(NIF: "NIF",nombre: "nombre",apellido: "apellidos",sueldo: 2600,puesto: "jefazo",practicas: false)
         let p2 = Persona(NIF: "NIF2",nombre: "nombre2",apellido: "apellidos2",sueldo: 2600,puesto: "mindundi",practicas: true)
@@ -97,7 +108,7 @@ class EmpleadoTableViewController: UITableViewController {
         //Iterar
         let inicioIterar = NSDate()
         var coleccionIterar = [Persona]()
-        for e in empresa{
+        for e in empresaIterar{
             coleccionIterar.append(e)
         }
         let finIterar = NSDate()
@@ -111,7 +122,10 @@ class EmpleadoTableViewController: UITableViewController {
         let diferencia2 = (finMap.timeIntervalSinceDate(inicioMap) * 1000)
         print("Tiempo mapa para insertar = ",diferencia2)
         
+        //pruebas()
         
+        pruebas2()
+        pruebas3()
         
         /*let resultCollection = empresa.map({
             (persona) -> String in
@@ -192,68 +206,114 @@ class EmpleadoTableViewController: UITableViewController {
         //La sumatoria es el penúltimo método a llamar y la media el último; ya que se necesita realizar todos los filtros anteriores
         //además que la media utiliza la sumatoria / array.count
         
+        //Sumar valores
+        //var empresaIterar = [Persona]()
+        //empresaIterar.appendContentsOf(empresa)
+        //var empresaMap: [Persona] = empresa
+        //Iterativo
+        var arrayAuxIterativo = [Persona]()
+        var arrayAuxDouble = [Double]()
+        let inicioSumatoria = NSDate()
+        for p in empresaIterar{
+            //let sueldoAux = p.sueldo
+            //let persona = Persona(NIF:p.NIF,nombre:p.nombre,apellido:p.apellido
+                //,sueldo:p.sueldo*2,puesto:p.puesto,practicas: p.practicas)
+            //arrayIterativo.append(p)
+            //arrayIterativo.last?.sueldo = sueldoAux * 2
+            //p.sueldo = sueldoAux * 2
+            //arrayAuxIterativo.append(persona)
+            //p.sueldo = p.sueldo*2
+            //arrayAuxIterativo.append(p)
+            arrayAuxDouble.append(p.sueldo)
+        }
+        let finSumatoria = NSDate()
+        let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
+        print("Tiempo iterativo = ",diferenciaIterativa)
+        //print("Empresa iterativo = ",arrayAuxIterativo.map({$0.sueldo}))
+        //print("Resultado iterativo = ",arrayAuxDouble)
+        
+        //Mapa
+        let inicioSumatoriaMapa = NSDate()
+        /*let sumatoriaMapa = empresa.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
+            return sueldoActual+sueldoSiguiente.sueldo
+        }*/
+        let newArray = empresa.map{$0.sueldo*2}
+        let finSumatoriaMapa = NSDate()
+        let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
+        print("Tiempo mapa = ",diferenciaMapa)
+        //print("empresaMap = ",newArray.map({$0}))
+        //print("Resultado mapa = ",sumatoriaMapa)
+        //Duplicar valor
+        //let duplicarSueldo = empresa.map({$0}).map({$0.sueldo*2})
+        //print("Sueldos dobles = ",duplicarSueldo)
+        //print("Empresa map = ",newArray)
+        
+        /*print("Empresa = ",empresa.map({$0.sueldo}))
+        print("empresaIterar= ",empresaIterar.map({$0.sueldo}))
+        print("arrayAuxIterativo = ",arrayAuxIterativo.map({$0.sueldo}))
+        print("newArray = ",newArray.map({$0}))*/
     }
     
-    func pruebas_NIF( entrada:[Persona], accion: String, nif: String) -> [Persona]{
-        //NIF igual a nif de entrada: devuelve array de objetos personas que coincida
+    
+    
+    //Métodos donde el mapa es más rápido
+    
+    func mapaMasRapido(){
+        //Al añadir valores de un atributo
+        //let duplicarSueldo = empresa.map({$0.sueldo}) es más rápido que un bucle y: arrayAuxDouble.append(p.sueldo)
         
-        var filtroNIF:[Persona]
-        
-        if(accion == "="){
-            filtroNIF = entrada.filter({$0.NIF == nif}).map({return $0})
-            //Filtro contains
-            //filtroNIF = entrada.filter({$0.NIF.containsString("NIF")}).map({return $0})
-        }else{
-            //Accion = !=
-            filtroNIF = entrada.filter({$0.NIF != nif}).map({return $0})
-            
-        }
-        
-        return filtroNIF
+        //Cuando se muestra el objeto entero el mapa NO es más rápido pero sí lo es para coger únicamente un atributo del objeto
     }
     
-    func pruebas_nombre(entrada:[Persona],accion: String, nombre:String) -> [Persona]{
-        var filtroNombre:[Persona]
-        if(accion == "="){
-            filtroNombre = entrada.filter({$0.nombre == nombre}).map({return $0})
-        }else if(accion == "!="){
-            filtroNombre = entrada.filter({$0.nombre != nombre}).map({return $0})
-        }else if(accion == "contenga"){
-            filtroNombre = entrada.filter({$0.nombre.containsString(nombre)}).map({return $0})
-        }else{
-            //accion = no contenga
-            filtroNombre = entrada.filter({!$0.nombre.containsString(nombre)}).map({return $0})
+    func pruebas2(){
+    
+        //Utilizar Map para transformar arrays -> Mucho más eficiente
+        var arrayMap = [Int]()
+        var arrayIterar = [Int]()
+        for i in 0...10000{
+            arrayMap.append(i)
+            arrayIterar.append(i)
         }
         
-        return filtroNombre
+        //Mapa
+        let inicioSumatoriaMapa = NSDate()
+        let _ = arrayMap.map({"\($0)"})
+        let finSumatoriaMapa = NSDate()
+        let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
+        print("Tiempo mapa pruebas2 = ",diferenciaMapa)
+        
+        
+        //Iterativo
+        let inicioSumatoria = NSDate()
+        var arrayIterarString = [String]()
+        for n in arrayIterar{
+            arrayIterarString.append("\(n)")
+        }
+        let finSumatoria = NSDate()
+        let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
+        print("Tiempo iterativo pruebas2 = ",diferenciaIterativa)
     }
     
-    func pruebas_sueldo(entrada:[Persona],accion: String, sueldo:Double) -> [Persona]{
+    func pruebas3(){
+        //Devolver texto nombre + apellidos de empresa -> Mucho más eficiente mapa
         
-        var filtroSueldo:[Persona]
+        //Mapa
+        let inicioSumatoriaMapa = NSDate()
+        let _ = empresa.map({$0.nombre + " " + $0.apellido})
+        let finSumatoriaMapa = NSDate()
+        let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
+        print("Tiempo mapa pruebas3 = ",diferenciaMapa)
         
-        if(accion == "<"){
-            filtroSueldo = entrada.filter({$0.sueldo < sueldo}).map({return $0})
-        }else if(accion == "="){
-            filtroSueldo = entrada.filter({$0.sueldo == sueldo}).map({return $0})
-        }else{
-            //Accion = >
-            filtroSueldo = entrada.filter({$0.sueldo > sueldo}).map({return $0})
+        
+        //Iterativo
+        let inicioSumatoria = NSDate()
+        var arrayIterarString = [String]()
+        for ei in empresaIterar{
+            arrayIterarString.append(ei.nombre + " " + ei.apellido)
         }
-        return filtroSueldo
-    }
-    
-    func pruebas_practicas(entrada:[Persona],accion: String) -> [Persona]{
-        var filtroPracticas: [Persona]
-        
-        if (accion == "si"){
-            filtroPracticas = entrada.filter({$0.practicas == true}).map({return $0})
-        }else{
-            //accion == no
-            filtroPracticas = entrada.filter({$0.practicas == false}).map({return $0})
-        }
-        
-        return filtroPracticas
+        let finSumatoria = NSDate()
+        let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
+        print("Tiempo iterativo pruebas3 = ",diferenciaIterativa)
     }
     
     
