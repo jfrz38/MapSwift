@@ -261,14 +261,19 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             return
         }
         
-        if (!comprobarBotones()){
+        if (!comprobarBotones() && mostrarNombreSeleccionado == true){
+            //Mostrar toda la empresa en un string: No hay búsqueda
+            resultadoBusqueda = empresa
+            tiemposAtributos()
+            return
+        }else if(!comprobarBotones()){
             //Allert controller
             //AlertController campos vacíos
             let alertController = UIAlertController(title: "¡Cuidado!", message: "Selecciona al menos un campo", preferredStyle: .Alert)
             let cancelAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil)
             alertController.addAction(cancelAction)
             self.presentViewController(alertController, animated: true, completion: nil)
-            return;
+            return
         }
         
         var arrayTiempoMedioMap = [Double]()
@@ -349,7 +354,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func tiemposAtributos(){
         //Mapa
         var tiempoMedioStringMap = [Double]()
-        for _ in 1...10000{
+        for _ in 1...10{
             let inicioTiempoMap = NSDate()
             var _ = resultadoBusqueda.map({$0.nombre+" "+$0.apellido})
             let finTiempoMap = NSDate()
