@@ -9,6 +9,7 @@
 import UIKit
 
 var resultadoBusqueda = [Persona]()
+var resultadoBusquedaString = [String]()
 var tiempoMap : Double = 0.0
 var tiempoBucle : Double = 0.0
 var tiempoStringMap : Double = 0.0
@@ -17,8 +18,11 @@ var empresa = [Persona]()
 var empresaIterar = [Persona]()
 var mediaSeleccionada = false
 var totalSeleccionado = false
+var mostrarNombreSeleccionado = false
 var sueldoTotalMap : Double = 0.0
-var sueltoTotalIterativo : Double = 0.0
+var sueldoTotalIterativo : Double = 0.0
+var sueldoMedioMap : Double = 0.0
+var sueldoMedioIterativo : Double = 0.0
 
 class EmpleadoTableViewController: UITableViewController {
     
@@ -92,17 +96,6 @@ class EmpleadoTableViewController: UITableViewController {
             empresaIterar.append(persona)
         }
         
-        /*
-        let p = Persona(NIF: "NIF",nombre: "nombre",apellido: "apellidos",sueldo: 2600,puesto: "jefazo",practicas: false)
-        let p2 = Persona(NIF: "NIF2",nombre: "nombre2",apellido: "apellidos2",sueldo: 2600,puesto: "mindundi",practicas: true)
-        let p3 = Persona(NIF: "NIF3",nombre: "nombre3",apellido: "apellidos3",sueldo: 100,puesto: "xd",practicas: true)
-        let p4 = Persona(NIF: "NIF4",nombre: "nombre4",apellido: "apellidos4",sueldo: 600,puesto: "xd",practicas: false)
-        
-        empresa.append(p)
-        empresa.append(p2)
-        empresa.append(p3)
-        empresa.append(p4)
-        */
         //Medir tiempos
         
         //Iterar

@@ -13,6 +13,7 @@ var tiempoMedioIterar : Double = 0.0
 
 class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
+    /*
     var nifIgual = false
     var nifNoIgual = false
     var sueldoMayor = false
@@ -22,6 +23,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     var becarioNo = false
     var nombreIgual = false
     var nombreNoIgual = false
+    */
     var getSueldoTotal = false
     var getSueldoMedio = false
     var opciones = [Bool]()
@@ -45,7 +47,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var btnBecario: UIButton!
     @IBOutlet weak var btnNoBecario: UIButton!
     @IBOutlet weak var btnNombreIgual: UIButton!
+    //@IBOutlet weak var btnNombreNoIgual: UIButton!
     @IBOutlet weak var btnNombreNoIgual: UIButton!
+    
+    @IBOutlet weak var btnMostrarNombre: UIButton!
+    @IBOutlet weak var btnMedia: UIButton!
+    @IBOutlet weak var btnTotal: UIButton!
     
     //TODO : Hacer Editing Changed de los campos de texto, cada vez que cambien su valor se comprueba si es
     //vacío o no para poner los botones correspondientes en .disable = true o no
@@ -59,6 +66,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        /*
         opciones.append(nifIgual)   //0
         opciones.append(nifNoIgual) //1
         opciones.append(sueldoMayor)//2
@@ -68,7 +76,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         opciones.append(becarioNo)  //6
         opciones.append(nombreIgual)//7
         opciones.append(nombreNoIgual)//8
-        
+        */
+        //Valores falsos por defecto
+        for _ in 0...8{
+            opciones.append(false)
+        }
         btnNifIgual.alpha = 0.25
         btnNifNoIgual.alpha = 0.25
         btnSueldoMenor.alpha = 0.25
@@ -78,8 +90,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         btnNoBecario.alpha = 0.25
         btnNombreIgual.alpha = 0.25
         btnNombreNoIgual.alpha = 0.25
-        
-        getSueldoTotal = true
+        btnMostrarNombre.alpha = 0.25
+        btnMedia.alpha = 0.25
+        btnTotal.alpha = 0.25
         
     }
 
@@ -211,6 +224,36 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }
         
     }
+    
+    @IBAction func mostrarNombre(sender: UIButton) {
+        if(mostrarNombreSeleccionado){
+            mostrarNombreSeleccionado = false
+            btnMostrarNombre.alpha = 0.25
+        }else{
+            mostrarNombreSeleccionado = true
+            btnMostrarNombre.alpha = 1
+        }
+    }
+    
+    @IBAction func tapTotal(sender: UIButton) {
+        if(getSueldoTotal){
+            getSueldoTotal = false
+            btnTotal.alpha = 0.25
+        }else{
+            getSueldoTotal = true
+            btnTotal.alpha = 1
+        }
+    }
+    
+    @IBAction func tapMedia(sender: UIButton) {
+        if(getSueldoMedio){
+            getSueldoMedio = false
+            btnMedia.alpha = 0.25
+        }else{
+            getSueldoMedio = true
+            btnMedia.alpha = 1
+        }
+    }
 
     //Pulsar la lupa para realizar búsqueda
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -218,7 +261,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             return
         }
         
-        comprobarBotones()
+        if (!comprobarBotones()){
+            //Allert controller
+            //AlertController campos vacíos
+            let alertController = UIAlertController(title: "¡Cuidado!", message: "Selecciona al menos un campo", preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return;
+        }
         
         var arrayTiempoMedioMap = [Double]()
         var arrayTiempoMedioIterar = [Double]()
@@ -263,7 +314,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         tiempoMedioIterar = aux/Double(arrayTiempoMedioIterar.count)
         print("Tiempo búsqueda medio iterar = ",tiempoMedioIterar)
         
-        tiemposAtributos()
+        //Mostrar por nombre
+        if(mostrarNombreSeleccionado){
+            tiemposAtributos()
+        }
+        
         //print("Resultados iterativo = ",resultadosFinalesIterar.map({$0.nombre}))
         
         /*if(resultadosFinalesMap.count == resultadosFinalesIterar.count){
@@ -320,6 +375,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             let finTiempoIterativo = NSDate()
             let diferenciaIterativa = (finTiempoIterativo.timeIntervalSinceDate(inicioTiempoIterativo) * 1000)
             tiempoMedioStringIterativo.append(diferenciaIterativa)
+            resultadoBusquedaString = atributosIterativo
 
         }
         aux = 0.0
@@ -331,7 +387,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     }
     
-    func comprobarBotones(){
+    func comprobarBotones() -> Bool{
         //Comprobar los campos de texto
         if(nifTxt.text! == ""){
             opciones[0] = false
@@ -355,11 +411,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             //TODO : Comprobar si es un número o no
             sueldoInsertado = Double(sueldoTxt.text!)
         }
-    }
-    
-    //Realiza la búsqueda utilizando Map
-    func busquedaMap() -> [Persona]{
         
+        //Alert controler si está todo vacío
         var j = 0
         for op in opciones{
             if(op == true){
@@ -368,10 +421,18 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             if(opciones.count-1 == j){
                 //Devuelve un array vacío
                 //TODO indicar que no se ha seleccionado nada
-                return [Persona]()
+                return false
             }
             j+=1
         }
+        
+        return true
+
+    }
+    
+    //Realiza la búsqueda utilizando Map
+    func busquedaMap() -> [Persona]{
+        
         
         var resultadosBusqueda = empresa
         var i = 0
@@ -385,11 +446,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if(getSueldoTotal || getSueldoMedio){
             //Calcular sueldo medio o total de la opción elegida
             //Se realiza en el mismo if porque para calcular la media se necesita el total
-            let resultadoFinal = resultadosBusqueda.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
+            sueldoTotalMap = resultadosBusqueda.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
                 return sueldoActual+sueldoSiguiente.sueldo
             }
             if(getSueldoMedio){
-                let sueldoMedio = resultadoFinal/Double(resultadosBusqueda.count)
+                sueldoMedioMap = sueldoTotalMap/Double(resultadosBusqueda.count)
             }
             
             
@@ -509,19 +570,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     //Utiliza la búsqueda iterativamente
     func busquedaBucle() -> [Persona]{
         
-        var j = 0
-        for op in opciones{
-            if(op == true){
-                break
-            }
-            if(opciones.count-1 == j){
-                //Devuelve un array vacío
-                //TODO indicar que no se ha seleccionado nada
-                return [Persona]()
-            }
-            j+=1
-        }
-        
         var resultadosBusqueda = empresaIterar
         var i = 0
         for _ in opciones{
@@ -534,17 +582,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         if(getSueldoTotal || getSueldoMedio){
             //Calcular sueldo medio o total de la opción elegida
             //Se realiza en el mismo if porque para calcular la media se necesita el total
-            var sueldoTotal:Double = 0
             for rb in resultadosBusqueda{
-                sueldoTotal += rb.sueldo
+                sueldoTotalIterativo += rb.sueldo
             }
             if(getSueldoMedio){
-                let sueldoMedio = sueldoTotal/Double(resultadosBusqueda.count)
+                sueldoMedioIterativo = sueldoTotalIterativo/Double(resultadosBusqueda.count)
             }
             
             
         }
-        
         return resultadosBusqueda
     }
     
