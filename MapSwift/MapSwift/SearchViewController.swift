@@ -47,8 +47,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var btnNombreIgual: UIButton!
     @IBOutlet weak var btnNombreNoIgual: UIButton!
     
-    //Visualizadores
-    
     //TODO : Hacer Editing Changed de los campos de texto, cada vez que cambien su valor se comprueba si es
     //vacío o no para poner los botones correspondientes en .disable = true o no
     //P. ej: Si el campo nombre está vacío, los botones del nombre estarán disabled y a false
@@ -73,61 +71,145 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         btnNifIgual.alpha = 0.25
         btnNifNoIgual.alpha = 0.25
+        btnSueldoMenor.alpha = 0.25
+        btnSueldoIgual.alpha = 0.25
+        btnSueldoMayor.alpha = 0.25
+        btnBecario.alpha = 0.25
+        btnNoBecario.alpha = 0.25
+        btnNombreIgual.alpha = 0.25
+        btnNombreNoIgual.alpha = 0.25
         
         getSueldoTotal = true
         
     }
 
     @IBAction func nifIgual(sender: UIButton) {
-        opciones[0] = true  //NIF igual
-        opciones[1] = false //NIF distinto
-        btnNifIgual.alpha = 1
-        btnNifNoIgual.alpha = 0.25
+        if(opciones[0] == true){
+            //Desactivar botón
+            opciones[0] = false  //NIF igual
+            //opciones[1] = false //NIF distinto
+            btnNifIgual.alpha = 0.25
+            //btnNifNoIgual.alpha = 0.25
+        }else{
+            opciones[0] = true  //NIF igual
+            opciones[1] = false //NIF distinto
+            btnNifIgual.alpha = 1
+            btnNifNoIgual.alpha = 0.25
+        }
+        
     }
 
     @IBAction func nifDistinto(sender: UIButton) {
-        opciones[0] = false //NIF igual
-        opciones[1] = true  //NIF distinto
-        btnNifIgual.alpha = 0.25
-        btnNifNoIgual.alpha = 1
+        if(opciones[1]==true){
+            //Desactivar botón
+            opciones[1] = false  //NIF distinto
+            btnNifNoIgual.alpha = 0.25
+        }else{
+            opciones[0] = false //NIF igual
+            opciones[1] = true  //NIF distinto
+            btnNifIgual.alpha = 0.25
+            btnNifNoIgual.alpha = 1
+        }
+        
     }
 
     @IBAction func sueldoMenor(sender: UIButton) {
-        opciones[3] = true  //Sueldo menor
-        opciones[4] = false //Sueldo igual
-        opciones[2] = false //Sueldo mayor
+        if(opciones[3] == true){
+            //Desactivar botón
+            opciones[3] = false  //Sueldo menor
+            btnSueldoMenor.alpha = 0.25
+        }else{
+            opciones[3] = true  //Sueldo menor
+            opciones[4] = false //Sueldo igual
+            opciones[2] = false //Sueldo mayor
+            btnSueldoMenor.alpha = 1
+            btnSueldoIgual.alpha = 0.25
+            btnSueldoMayor.alpha = 0.25
+        }
+        
     }
     
     @IBAction func sueldoIgual(sender: UIButton) {
-        opciones[3] = false //Sueldo menor
-        opciones[4] = true  //Sueldo igual
-        opciones[2] = false //Sueldo mayor
+        if(opciones[4] == true){
+            //Desactivar botón
+            opciones[4] = false
+            btnSueldoIgual.alpha = 0.25
+        }else{
+            opciones[3] = false //Sueldo menor
+            opciones[4] = true  //Sueldo igual
+            opciones[2] = false //Sueldo mayor
+            btnSueldoMenor.alpha = 0.25
+            btnSueldoIgual.alpha = 1
+            btnSueldoMayor.alpha = 0.25
+        }
+        
     }
     
     @IBAction func sueldoMayor(sender: UIButton) {
-        opciones[3] = false //Sueldo menor
-        opciones[4] = false //Sueldo igual
-        opciones[2] = true  //Sueldo mayor
+        if(opciones[2] == true){
+            opciones[2] = false
+            btnSueldoMayor.alpha = 0.25
+        }else{
+            opciones[3] = false //Sueldo menor
+            opciones[4] = false //Sueldo igual
+            opciones[2] = true  //Sueldo mayor
+            btnSueldoMenor.alpha = 0.25
+            btnSueldoIgual.alpha = 0.25
+            btnSueldoMayor.alpha = 1
+        }
+        
     }
     
     @IBAction func esBecario(sender: UIButton) {
-        opciones[5] = true  //Becario
-        opciones[6] = false //No becario
+        if(opciones[5] == true){
+            opciones[5] = false
+            btnBecario.alpha = 0.25
+        }else{
+            opciones[5] = true  //Becario
+            opciones[6] = false //No becario
+            btnBecario.alpha = 1
+            btnNoBecario.alpha = 0.25
+        }
+        
     }
     
     @IBAction func noEsBecario(sender: UIButton) {
-        opciones[5] = false //Becario
-        opciones[6] = true  //No becario
+        if(opciones[6] == true){
+            opciones[6] = false
+            btnNoBecario.alpha = 0.25
+        }else{
+            opciones[5] = false //Becario
+            opciones[6] = true  //No becario
+            btnBecario.alpha = 0.25
+            btnNoBecario.alpha = 1
+        }
+        
     }
     
     @IBAction func nombreIgual(sender: UIButton) {
-        opciones[7] = true  //Nombre igual
-        opciones[8] = false //nombre diferente
+        if(opciones[7]==true){
+            opciones[7] = false
+            btnNombreIgual.alpha = 0.25
+        }else{
+            opciones[7] = true  //Nombre igual
+            opciones[8] = false //nombre diferente
+            btnNombreIgual.alpha = 1
+            btnNombreNoIgual.alpha = 0.25
+        }
+        
     }
     
     @IBAction func nombreDistinto(sender: UIButton) {
-        opciones[7] = false //Nombre igual
-        opciones[8] = true  //Nombre diferente
+        if(opciones[8]==true){
+            opciones[8] = false
+            btnNombreNoIgual.alpha = 0.25
+        }else{
+            opciones[7] = false //Nombre igual
+            opciones[8] = true  //Nombre diferente
+            btnNombreIgual.alpha = 0.25
+            btnNombreNoIgual.alpha = 1
+        }
+        
     }
 
     //Pulsar la lupa para realizar búsqueda
@@ -212,7 +294,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func tiemposAtributos(){
         //Mapa
         var tiempoMedioStringMap = [Double]()
-        for _ in 1...10{
+        for _ in 1...10000{
             let inicioTiempoMap = NSDate()
             var _ = resultadoBusqueda.map({$0.nombre+" "+$0.apellido})
             let finTiempoMap = NSDate()
@@ -223,6 +305,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         for i in tiempoMedioStringMap{
             aux+=i
         }
+        tiempoStringMap = aux/Double(tiempoMedioStringMap.count)
         print("Tiempo medio string map = ",aux/Double(tiempoMedioStringMap.count))
         
         //Iterativo
@@ -243,7 +326,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         for i in tiempoMedioStringIterativo{
             aux+=i
         }
-        print("Tiempo medio string iterativo = ",aux/Double(tiempoMedioStringIterativo.count))
+        tiempoStringBucle = aux/Double(tiempoMedioStringIterativo.count)
+        print("Tiempo medio string iterativo = ",tiempoStringBucle)
 
     }
     

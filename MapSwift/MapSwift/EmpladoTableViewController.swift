@@ -57,7 +57,7 @@ class EmpleadoTableViewController: UITableViewController {
         var numNombreJefe = 1
         var numNombreEmpleado = 1
         var numNombreBecario = 1
-        for _ in 0...100000{
+        for _ in 0...10{
             let n = Int(arc4random_uniform(UInt32(101-1))+UInt32(1))
             var p: Persona!
             if(n < 10){
