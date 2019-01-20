@@ -119,6 +119,7 @@ class EmpleadoTableViewController: UITableViewController {
         
         pruebas2()
         pruebas3()
+        pruebas4()
         
         /*let resultCollection = empresa.map({
             (persona) -> String in
@@ -307,6 +308,50 @@ class EmpleadoTableViewController: UITableViewController {
         let finSumatoria = NSDate()
         let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
         print("Tiempo iterativo pruebas3 = ",diferenciaIterativa)
+    }
+    
+    func pruebas4(){
+        //Cambiar el propio array -> Mucho más eficiente array
+        
+        var array1 = [Int]()
+        var array2 = [Int]()
+        
+        for i in 0...100000{
+            array1.append(i)
+            array2.append(i)
+        }
+        
+        
+        let inicioMapa = NSDate()
+        array1 = array1.map({$0 * 2})
+        let finMapa = NSDate()
+        let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+        print("Tiempo mapa pruebas4 = ",diferenciaMapa)
+        
+        
+        let inicioBucle = NSDate()
+        for i in 0...array2.count-1{
+            array2[i] = array2[i] * 2
+        }
+        let finBucle = NSDate()
+        let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+        print("Tiempo bucle pruebas4 = ",diferenciaBucle)
+
+        /*if(array1.count != array2.count){
+            print("No son iguales 1")
+        }else{
+            var b = false
+            for i in 0...array1.count-1{
+                if(array1[i] != array2[i]){
+                    print("No son iguales 2")
+                    b = true
+                    break
+                }
+            }
+            if(!b){
+                print("Son iguales")
+            }
+        }*/
     }
     
     
