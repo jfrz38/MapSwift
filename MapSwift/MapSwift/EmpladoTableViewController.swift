@@ -387,9 +387,71 @@ class EmpleadoTableViewController: UITableViewController {
         let finBucle = NSDate()
         let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
         print("Tiempo bucle pruebas5 = ",diferenciaBucle)
-                
+        
 
+        pruebas6()
     }
     
+    func pruebas6(){
+        //Reduce : Sumatoria de todos los elementos
+        var array1int = [Int]()
+        var array2int = [Int]()
+        for i in 0...100000{
+            array1int.append(i)
+            array2int.append(i)
+        }
+        
+        let inicioMapa = NSDate()
+        let sumatoriaMap  = array1int.reduce(0){ (antes, despues) -> Int in
+            return antes + despues
+        }
+        let finMapa = NSDate()
+        let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+        print("Tiempo mapa int pruebas6 = ",diferenciaMapa)
+        
+        
+        let inicioBucle = NSDate()
+        var sumatoriaBucle = 0
+        for i in array2int{
+            sumatoriaBucle += i
+        }
+        let finBucle = NSDate()
+        let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+        print("Tiempo bucle int pruebas6 = ",diferenciaBucle)
+
+        
+        
+        
+        //Reduce2 : Concatenación de todos los strings
+        var array1string = [String]()
+        var array2string = [String]()
+        for _ in 0...100000{
+            array1string.append("xd")
+            array2string.append("xd")
+        }
+        
+        let inicioMapaStr = NSDate()
+        let strSalida = array1string.reduce("") { (strAntes, strDespues) -> String in
+            return strAntes+strDespues+"aaa"
+        }
+        let finMapaStr = NSDate()
+        let diferenciaMapaStr = (finMapaStr.timeIntervalSinceDate(inicioMapaStr) * 1000)
+        print("Tiempo mapa str pruebas6 = ",diferenciaMapaStr)
+
+        
+        let inicioBucleStr = NSDate()
+        var strBucle = ""
+        for str in array2string{
+            strBucle+=str+"aaa"
+        }
+        let finBucleStr = NSDate()
+        let diferenciaBucleStr = (finBucleStr.timeIntervalSinceDate(inicioBucleStr) * 1000)
+        print("Tiempo bucle str pruebas6 = ",diferenciaBucleStr)
+        
+        //!!!!!!!!
+        //Sin la concatenación de "aaa" es más rápido el bucle
+        //P. ej, hacerlo para añadie el "€" al sueldo
+        
+    }
     
 }
