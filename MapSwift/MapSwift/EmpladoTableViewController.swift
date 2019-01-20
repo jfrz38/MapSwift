@@ -352,6 +352,43 @@ class EmpleadoTableViewController: UITableViewController {
                 print("Son iguales")
             }
         }*/
+        
+        pruebas5()  //filtrado
+    }
+    
+    func pruebas5(){
+        //Filtrar arrays para devolver solo el menor que X número -> Bucle más eficiente
+        
+        var array1 = [Int]()
+        var array2 = [Int]()
+        
+        for i in 0...100000{
+            array1.append(i)
+            array2.append(i)
+        }
+        
+        let tam = Int(arc4random_uniform(UInt32(array1.count-1))+UInt32(0))
+        
+        let inicioMapa = NSDate()
+        array1 = array1.filter({$0 < tam})
+        let finMapa = NSDate()
+        let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+        print("Tiempo mapa pruebas5 = ",diferenciaMapa)
+
+        
+        let inicioBucle = NSDate()
+        var array2aux = [Int]()
+        for i in array2{
+            if(i < tam){
+                array2aux.append(i)
+            }
+        }
+        array2 = array2aux
+        let finBucle = NSDate()
+        let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+        print("Tiempo bucle pruebas5 = ",diferenciaBucle)
+                
+
     }
     
     
