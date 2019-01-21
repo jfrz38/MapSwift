@@ -142,5 +142,57 @@ class EmpleadoTableViewController: UITableViewController {
         return n/Double(arrayMedia.count)
     }
     
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return empresa.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("EmpleadoViewCell", forIndexPath: indexPath) as! EmpleadoViewCell
         
+        cell.nombreLbl.text = empresa[indexPath.row].nombre
+        cell.apellidosLbl.text = empresa[indexPath.row].apellido
+        cell.nifLbl.text = empresa[indexPath.row].NIF
+        var esBecarioPregunta : Bool
+        var esBecarioTexto : String
+        esBecarioPregunta = empresa[indexPath.row].practicas
+        if(esBecarioPregunta == true){
+            esBecarioTexto = "Becario"
+        } else {
+            esBecarioTexto = "Empleado"
+        }
+        cell.becarioLbl.text = esBecarioTexto
+        cell.puestoLbl.text = empresa[indexPath.row].puesto
+        cell.sueldoLbl.text = "\(empresa[indexPath.row].sueldo)"
+        
+        //cell.telefono.text = pacientes[indexPath.row].telefono
+        //cell.sexo.text = pacientes[indexPath.row].sexo
+        //cell.edad.text = pacientes[indexPath.row].edad
+        //cell.foto.image = pacientes[indexPath.row].foto
+        //cell.evaluacion.gradoAfinidad = amigos[indexPath.row].gradoAfinidad
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath
+        indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    /*override func tableView(tableView: UITableView, commitEditingStyle
+        editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle != .Delete {return}
+        pacientes.removeAtIndex(indexPath.row)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+    
+        
+}*/
 }

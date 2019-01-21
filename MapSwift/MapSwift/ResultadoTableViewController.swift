@@ -1,5 +1,5 @@
 //
-//  ResultadoTableViewCell.swift
+//  ResultadoTableViewController.swift
 //  MapSwift
 //
 //  Created by Aula11 on 15/1/19.

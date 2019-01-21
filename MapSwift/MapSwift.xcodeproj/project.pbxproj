@@ -11,7 +11,7 @@
 		29057FFC21EE63CB003F39ED /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFB21EE63CB003F39ED /* SearchViewController.swift */; };
 		29057FFE21EE650E003F39ED /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFD21EE650E003F39ED /* ResultViewController.swift */; };
 		2905800021EE6608003F39ED /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29057FFF21EE6608003F39ED /* TimeViewController.swift */; };
-		2905800221EE6771003F39ED /* ResultadoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */; };
+		2905800221EE6771003F39ED /* ResultadoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905800121EE6771003F39ED /* ResultadoTableViewController.swift */; };
 		2905800421EE6789003F39ED /* ResultadoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2905800321EE6789003F39ED /* ResultadoViewCell.swift */; };
 		290BEF8321F6333000346D54 /* Pruebas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8221F6333000346D54 /* Pruebas.swift */; };
 		D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2178E2E21EDFF18009255CB /* AppDelegate.swift */; };
@@ -68,7 +68,7 @@
 		29057FFB21EE63CB003F39ED /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		29057FFD21EE650E003F39ED /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		29057FFF21EE6608003F39ED /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
-		2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadoTableViewCell.swift; sourceTree = "<group>"; };
+		2905800121EE6771003F39ED /* ResultadoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadoTableViewController.swift; sourceTree = "<group>"; };
 		2905800321EE6789003F39ED /* ResultadoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultadoViewCell.swift; sourceTree = "<group>"; };
 		290BEF8221F6333000346D54 /* Pruebas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pruebas.swift; sourceTree = "<group>"; };
 		D2178E2B21EDFF18009255CB /* MapSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,7 +157,7 @@
 				29057FFB21EE63CB003F39ED /* SearchViewController.swift */,
 				29057FFD21EE650E003F39ED /* ResultViewController.swift */,
 				29057FFF21EE6608003F39ED /* TimeViewController.swift */,
-				2905800121EE6771003F39ED /* ResultadoTableViewCell.swift */,
+				2905800121EE6771003F39ED /* ResultadoTableViewController.swift */,
 				2905800321EE6789003F39ED /* ResultadoViewCell.swift */,
 			);
 			path = MapSwift;
@@ -321,7 +321,7 @@
 				29057FFE21EE650E003F39ED /* ResultViewController.swift in Sources */,
 				D2178E3721EDFF18009255CB /* MapSwift.xcdatamodeld in Sources */,
 				D2178E3121EDFF18009255CB /* EmpladoTableViewController.swift in Sources */,
-				2905800221EE6771003F39ED /* ResultadoTableViewCell.swift in Sources */,
+				2905800221EE6771003F39ED /* ResultadoTableViewController.swift in Sources */,
 				D2178E2F21EDFF18009255CB /* AppDelegate.swift in Sources */,
 				29057FE421EE509A003F39ED /* EmpleadoViewCell.swift in Sources */,
 			);
