@@ -23,6 +23,8 @@ var sueldoTotalMap : Double = 0.0
 var sueldoTotalIterativo : Double = 0.0
 var sueldoMedioMap : Double = 0.0
 var sueldoMedioIterativo : Double = 0.0
+var tamFinal : Int = 0
+var arrayMedia = [Double]()
 
 class EmpleadoTableViewController: UITableViewController {
     
@@ -30,7 +32,14 @@ class EmpleadoTableViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        inicializar()
+        let tamanios = [1,10,100,500,1000,10000,100000,1000000]
+        
+        for n in tamanios{
+            tamFinal = n
+            inicializar()
+        }
+        
+        
         
         /*pruebas()
         
@@ -49,7 +58,18 @@ class EmpleadoTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func hacer_media() -> Double{
+        var n : Double = 0.0
+        for d in arrayMedia{
+            n+=d
+        }
+        
+        return n/Double(arrayMedia.count)
+    }
+    
     func inicializar(){
+        
+        print("Pruebas con tamaño = ",String(tamFinal))
         
         //Crear personas aleatorias en la empresa
         
@@ -97,23 +117,32 @@ class EmpleadoTableViewController: UITableViewController {
         }
         
         //Medir tiempos
-        
-        //Iterar
-        let inicioIterar = NSDate()
-        var coleccionIterar = [Persona]()
-        for e in empresaIterar{
-            coleccionIterar.append(e)
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            //Iterar
+            let inicioIterar = NSDate()
+            var coleccionIterar = [Persona]()
+            for e in empresaIterar{
+                coleccionIterar.append(e)
+            }
+            let finIterar = NSDate()
+            let diferencia = (finIterar.timeIntervalSinceDate(inicioIterar) * 1000)
+            arrayMedia.append(diferencia)
         }
-        let finIterar = NSDate()
-        let diferencia = (finIterar.timeIntervalSinceDate(inicioIterar) * 1000)
-        print("Tiempo iterativo para insertar = ",diferencia)
         
-        //Map
-        let inicioMap = NSDate()
-        let _ = empresa.map({$0})
-        let finMap = NSDate()
-        let diferencia2 = (finMap.timeIntervalSinceDate(inicioMap) * 1000)
-        print("Tiempo mapa para insertar = ",diferencia2)
+        print("Tiempo iterativo para insertar = ",hacer_media())
+        
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            //Map
+            let inicioMap = NSDate()
+            let _ = empresa.map({$0})
+            let finMap = NSDate()
+            let diferencia2 = (finMap.timeIntervalSinceDate(inicioMap) * 1000)
+            arrayMedia.append(diferencia2)
+        }
+        
+        print("Tiempo mapa para insertar = ",hacer_media())
         
         //pruebas()
         
@@ -205,36 +234,43 @@ class EmpleadoTableViewController: UITableViewController {
         //empresaIterar.appendContentsOf(empresa)
         //var empresaMap: [Persona] = empresa
         //Iterativo
-        var arrayAuxIterativo = [Persona]()
-        var arrayAuxDouble = [Double]()
-        let inicioSumatoria = NSDate()
-        for p in empresaIterar{
-            //let sueldoAux = p.sueldo
-            //let persona = Persona(NIF:p.NIF,nombre:p.nombre,apellido:p.apellido
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            //var arrayAuxIterativo = [Persona]()
+            var arrayAuxDouble = [Double]()
+            let inicioSumatoria = NSDate()
+            for p in empresaIterar{
+                //let sueldoAux = p.sueldo
+                //let persona = Persona(NIF:p.NIF,nombre:p.nombre,apellido:p.apellido
                 //,sueldo:p.sueldo*2,puesto:p.puesto,practicas: p.practicas)
-            //arrayIterativo.append(p)
-            //arrayIterativo.last?.sueldo = sueldoAux * 2
-            //p.sueldo = sueldoAux * 2
-            //arrayAuxIterativo.append(persona)
-            //p.sueldo = p.sueldo*2
-            //arrayAuxIterativo.append(p)
-            arrayAuxDouble.append(p.sueldo)
+                //arrayIterativo.append(p)
+                //arrayIterativo.last?.sueldo = sueldoAux * 2
+                //p.sueldo = sueldoAux * 2
+                //arrayAuxIterativo.append(persona)
+                //p.sueldo = p.sueldo*2
+                //arrayAuxIterativo.append(p)
+                arrayAuxDouble.append(p.sueldo)
+            }
+            let finSumatoria = NSDate()
+            let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
+            arrayMedia.append(diferenciaIterativa)
         }
-        let finSumatoria = NSDate()
-        let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
-        print("Tiempo iterativo = ",diferenciaIterativa)
+        
+        print("Tiempo iterativo pruebas = ",hacer_media())
         //print("Empresa iterativo = ",arrayAuxIterativo.map({$0.sueldo}))
         //print("Resultado iterativo = ",arrayAuxDouble)
         
         //Mapa
-        let inicioSumatoriaMapa = NSDate()
-        /*let sumatoriaMapa = empresa.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
-            return sueldoActual+sueldoSiguiente.sueldo
-        }*/
-        let newArray = empresa.map{$0.sueldo*2}
-        let finSumatoriaMapa = NSDate()
-        let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
-        print("Tiempo mapa = ",diferenciaMapa)
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            let inicioSumatoriaMapa = NSDate()
+            let _ = empresa.map{$0.sueldo*2}
+            let finSumatoriaMapa = NSDate()
+            let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
+            arrayMedia.append(diferenciaMapa)
+        }
+        
+        print("Tiempo mapa pruebas= ",hacer_media())
         //print("empresaMap = ",newArray.map({$0}))
         //print("Resultado mapa = ",sumatoriaMapa)
         //Duplicar valor
@@ -264,94 +300,112 @@ class EmpleadoTableViewController: UITableViewController {
         //Utilizar Map para transformar arrays -> Mucho más eficiente
         var arrayMap = [Int]()
         var arrayIterar = [Int]()
-        for i in 0...10000{
+        for i in 0...tamFinal{
             arrayMap.append(i)
             arrayIterar.append(i)
         }
         
-        //Mapa
-        let inicioSumatoriaMapa = NSDate()
-        let _ = arrayMap.map({"\($0)"})
-        let finSumatoriaMapa = NSDate()
-        let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
-        print("Tiempo mapa pruebas2 = ",diferenciaMapa)
-        
-        
-        //Iterativo
-        let inicioSumatoria = NSDate()
-        var arrayIterarString = [String]()
-        for n in arrayIterar{
-            arrayIterarString.append("\(n)")
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            //Mapa
+            let inicioSumatoriaMapa = NSDate()
+            let _ = arrayMap.map({"\($0)"})
+            let finSumatoriaMapa = NSDate()
+            let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
+
+            arrayMedia.append(diferenciaMapa)
         }
-        let finSumatoria = NSDate()
-        let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
-        print("Tiempo iterativo pruebas2 = ",diferenciaIterativa)
+        
+        print("Tiempo mapa pruebas2 = ",hacer_media())
+        
+        arrayMedia = [Double]()
+        //Iterativo
+        for _ in 0...10{
+            let inicioSumatoria = NSDate()
+            var arrayIterarString = [String]()
+            for n in arrayIterar{
+                arrayIterarString.append("\(n)")
+            }
+            let finSumatoria = NSDate()
+            let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
+            arrayMedia.append(diferenciaIterativa)
+        }
+        
+        print("Tiempo iterativo pruebas2 = ",hacer_media())
     }
     
     func pruebas3(){
         //Devolver texto nombre + apellidos de empresa -> Mucho más eficiente mapa
         
-        //Mapa
-        let inicioSumatoriaMapa = NSDate()
-        let _ = empresa.map({$0.nombre + " " + $0.apellido})
-        let finSumatoriaMapa = NSDate()
-        let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
-        print("Tiempo mapa pruebas3 = ",diferenciaMapa)
-        
-        
-        //Iterativo
-        let inicioSumatoria = NSDate()
-        var arrayIterarString = [String]()
-        for ei in empresaIterar{
-            arrayIterarString.append(ei.nombre + " " + ei.apellido)
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            //Mapa
+            let inicioSumatoriaMapa = NSDate()
+            let _ = empresa.map({$0.nombre + " " + $0.apellido})
+            let finSumatoriaMapa = NSDate()
+            let diferenciaMapa = (finSumatoriaMapa.timeIntervalSinceDate(inicioSumatoriaMapa) * 1000)
+            arrayMedia.append(diferenciaMapa)
         }
-        let finSumatoria = NSDate()
-        let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
-        print("Tiempo iterativo pruebas3 = ",diferenciaIterativa)
+        
+        print("Tiempo mapa pruebas3 = ",hacer_media())
+        
+        
+        arrayMedia = [Double]()
+        
+        for _ in 0...10{
+            //Iterativo
+            let inicioSumatoria = NSDate()
+            var arrayIterarString = [String]()
+            for ei in empresaIterar{
+                arrayIterarString.append(ei.nombre + " " + ei.apellido)
+            }
+            let finSumatoria = NSDate()
+            let diferenciaIterativa = (finSumatoria.timeIntervalSinceDate(inicioSumatoria) * 1000)
+            arrayMedia.append(diferenciaIterativa)
+        }
+        
+        print("Tiempo iterativo pruebas3 = ",hacer_media())
     }
     
     func pruebas4(){
         //Cambiar el propio array -> Mucho más eficiente array
         
-        var array1 = [Int]()
-        var array2 = [Int]()
-        
-        for i in 0...100000{
-            array1.append(i)
-            array2.append(i)
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array1 = [Int]()
+            
+            for i in 0...tamFinal{
+                array1.append(i)
+            }
+            
+            
+            let inicioMapa = NSDate()
+            array1 = array1.map({$0 * 2})
+            let finMapa = NSDate()
+            let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+            arrayMedia.append(diferenciaMapa)
         }
         
+        print("Tiempo mapa pruebas4 = ",hacer_media())
         
-        let inicioMapa = NSDate()
-        array1 = array1.map({$0 * 2})
-        let finMapa = NSDate()
-        let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
-        print("Tiempo mapa pruebas4 = ",diferenciaMapa)
-        
-        
-        let inicioBucle = NSDate()
-        for i in 0...array2.count-1{
-            array2[i] = array2[i] * 2
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array2 = [Int]()
+            
+            for i in 0...tamFinal{
+                array2.append(i)
+            }
+            let inicioBucle = NSDate()
+            for i in 0...array2.count-1{
+                array2[i] = array2[i] * 2
+            }
+            let finBucle = NSDate()
+            let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+            arrayMedia.append(diferenciaBucle)
         }
-        let finBucle = NSDate()
-        let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
-        print("Tiempo bucle pruebas4 = ",diferenciaBucle)
+        
+        print("Tiempo bucle pruebas4 = ",hacer_media())
 
-        /*if(array1.count != array2.count){
-            print("No son iguales 1")
-        }else{
-            var b = false
-            for i in 0...array1.count-1{
-                if(array1[i] != array2[i]){
-                    print("No son iguales 2")
-                    b = true
-                    break
-                }
-            }
-            if(!b){
-                print("Son iguales")
-            }
-        }*/
         
         pruebas5()  //filtrado
     }
@@ -359,34 +413,51 @@ class EmpleadoTableViewController: UITableViewController {
     func pruebas5(){
         //Filtrar arrays para devolver solo el menor que X número -> Bucle más eficiente
         
-        var array1 = [Int]()
-        var array2 = [Int]()
-        
-        for i in 0...100000{
-            array1.append(i)
-            array2.append(i)
+        //Tamaño aleatorio
+        let tam = Int(arc4random_uniform(UInt32(tamFinal-1))+UInt32(0))
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array1 = [Int]()
+            
+            for i in 0...tamFinal{
+                array1.append(i)
+            }
+            
+            let inicioMapa = NSDate()
+            array1 = array1.filter({$0 < tam})
+            let finMapa = NSDate()
+            let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+            arrayMedia.append(diferenciaMapa)
+            
         }
         
-        let tam = Int(arc4random_uniform(UInt32(array1.count-1))+UInt32(0))
-        
-        let inicioMapa = NSDate()
-        array1 = array1.filter({$0 < tam})
-        let finMapa = NSDate()
-        let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
-        print("Tiempo mapa pruebas5 = ",diferenciaMapa)
+        print("Tiempo mapa pruebas5 = ",hacer_media())
 
         
-        let inicioBucle = NSDate()
-        var array2aux = [Int]()
-        for i in array2{
-            if(i < tam){
-                array2aux.append(i)
+        arrayMedia = [Double]()
+        
+        for _ in 0...10{
+            var array2 = [Int]()
+            
+            for i in 0...tamFinal{
+                array2.append(i)
             }
+            
+            let inicioBucle = NSDate()
+            var array2aux = [Int]()
+            for i in array2{
+                if(i < tam){
+                    array2aux.append(i)
+                }
+            }
+            array2 = array2aux
+            let finBucle = NSDate()
+            let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+            arrayMedia.append(diferenciaBucle)
         }
-        array2 = array2aux
-        let finBucle = NSDate()
-        let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
-        print("Tiempo bucle pruebas5 = ",diferenciaBucle)
+        
+        
+        print("Tiempo bucle pruebas5 = ",hacer_media())
         
 
         pruebas6()
@@ -394,64 +465,88 @@ class EmpleadoTableViewController: UITableViewController {
     
     func pruebas6(){
         //Reduce : Sumatoria de todos los elementos
-        var array1int = [Int]()
-        var array2int = [Int]()
-        for i in 0...100000{
-            array1int.append(i)
-            array2int.append(i)
+        
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array1int = [Int]()
+            for i in 0...tamFinal{
+                array1int.append(i)
+            }
+            
+            let inicioMapa = NSDate()
+            let _  = array1int.reduce(0){ (antes, despues) -> Int in
+                return antes + despues
+            }
+            let finMapa = NSDate()
+            let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+            arrayMedia.append(diferenciaMapa)
         }
         
-        let inicioMapa = NSDate()
-        let sumatoriaMap  = array1int.reduce(0){ (antes, despues) -> Int in
-            return antes + despues
-        }
-        let finMapa = NSDate()
-        let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
-        print("Tiempo mapa int pruebas6 = ",diferenciaMapa)
+        print("Tiempo mapa int pruebas6 = ",hacer_media())
         
-        
-        let inicioBucle = NSDate()
-        var sumatoriaBucle = 0
-        for i in array2int{
-            sumatoriaBucle += i
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array2int = [Int]()
+            for i in 0...tamFinal{
+                array2int.append(i)
+            }
+            
+            let inicioBucle = NSDate()
+            var sumatoriaBucle = 0
+            for i in array2int{
+                sumatoriaBucle += i
+            }
+            let finBucle = NSDate()
+            let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+            arrayMedia.append(diferenciaBucle)
         }
-        let finBucle = NSDate()
-        let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
-        print("Tiempo bucle int pruebas6 = ",diferenciaBucle)
+        
+        print("Tiempo bucle int pruebas6 = ",hacer_media())
 
         
+        pruebas7()
         
+    }
+    
+    func pruebas7(){
+        //Pasar int a string y añadirle €
         
-        //Reduce2 : Concatenación de todos los strings
-        var array1string = [String]()
-        var array2string = [String]()
-        for _ in 0...100000{
-            array1string.append("xd")
-            array2string.append("xd")
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array1int = [Int]()
+            for i in 0...tamFinal{
+                array1int.append(i)
+            }
+            
+            
+            let inicioMapa = NSDate()
+            let _ = array1int.map({String($0)+"€"})
+            let finMapa = NSDate()
+            let diferenciaMapa = (finMapa.timeIntervalSinceDate(inicioMapa) * 1000)
+            arrayMedia.append(diferenciaMapa)
         }
         
-        let inicioMapaStr = NSDate()
-        let strSalida = array1string.reduce("") { (strAntes, strDespues) -> String in
-            return strAntes+strDespues+"aaa"
+        print("Tiempo mapa pruebas7 = ",hacer_media())
+        
+        arrayMedia = [Double]()
+        for _ in 0...10{
+            var array2int = [Int]()
+            for i in 0...tamFinal{
+                array2int.append(i)
+            }
+            
+            let inicioBucle = NSDate()
+            var arrStrAux = [String]()
+            for num in array2int{
+                arrStrAux.append(String(num)+"€")
+            }
+            let finBucle = NSDate()
+            let diferenciaBucle = (finBucle.timeIntervalSinceDate(inicioBucle) * 1000)
+            arrayMedia.append(diferenciaBucle)
         }
-        let finMapaStr = NSDate()
-        let diferenciaMapaStr = (finMapaStr.timeIntervalSinceDate(inicioMapaStr) * 1000)
-        print("Tiempo mapa str pruebas6 = ",diferenciaMapaStr)
+        
+        print("Tiempo bucle pruebas7 = ",hacer_media())
 
-        
-        let inicioBucleStr = NSDate()
-        var strBucle = ""
-        for str in array2string{
-            strBucle+=str+"aaa"
-        }
-        let finBucleStr = NSDate()
-        let diferenciaBucleStr = (finBucleStr.timeIntervalSinceDate(inicioBucleStr) * 1000)
-        print("Tiempo bucle str pruebas6 = ",diferenciaBucleStr)
-        
-        //!!!!!!!!
-        //Sin la concatenación de "aaa" es más rápido el bucle
-        //P. ej, hacerlo para añadie el "€" al sueldo
-        
     }
     
 }
