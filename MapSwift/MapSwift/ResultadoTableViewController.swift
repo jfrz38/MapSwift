@@ -40,12 +40,11 @@ class ResultadoTableViewController: UITableViewController {
         cell.puestoResLbl.text = resultadoBusqueda[indexPath.row].puesto
         cell.sueldoResLbl.text = "\(resultadoBusqueda[indexPath.row].sueldo)"
         
-        //cell.telefono.text = pacientes[indexPath.row].telefono
-        //cell.sexo.text = pacientes[indexPath.row].sexo
-        //cell.edad.text = pacientes[indexPath.row].edad
-        //cell.foto.image = pacientes[indexPath.row].foto
-        //cell.evaluacion.gradoAfinidad = amigos[indexPath.row].gradoAfinidad
-        
+        if(!(indexPath.row % 2 == 0)){
+            cell.backgroundColor = UIColor.init(red: 0.62, green: 0.84, blue: 0.82, alpha: 0.4)
+        }else{
+            //cell.backgroundColor = UIColor.init(red: 0.79, green: 0.79, blue: 0.79, alpha: 0.3)
+        }
         return cell
     }
     

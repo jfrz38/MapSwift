@@ -40,6 +40,7 @@ class EmpleadoTableViewController: UITableViewController {
             let tamanios = [1,10,100,500,1000,10000,100000,1000000]
             for n in tamanios{
                 tamFinal = n
+                print("Pruebas con tamaño = ",String(tamFinal))
                 let prueba = Pruebas()
                 prueba.inicializar()
             }
@@ -55,8 +56,6 @@ class EmpleadoTableViewController: UITableViewController {
     
     func inicializar(){
         
-        print("Pruebas con tamaño = ",String(tamFinal))
-        
         //Crear personas aleatorias en la empresa
         
         //Tres prototipos de personas: Jefe - empleado - becario
@@ -67,7 +66,7 @@ class EmpleadoTableViewController: UITableViewController {
         var numNombreJefe = 1
         var numNombreEmpleado = 1
         var numNombreBecario = 1
-        for _ in 0...500{
+        for _ in 0...4{
             let n = Int(arc4random_uniform(UInt32(101-1))+UInt32(1))
             var p: Persona!
             if(n < 10){
@@ -172,11 +171,12 @@ class EmpleadoTableViewController: UITableViewController {
         cell.puestoLbl.text = empresa[indexPath.row].puesto
         cell.sueldoLbl.text = "\(empresa[indexPath.row].sueldo)"
         
-        //cell.telefono.text = pacientes[indexPath.row].telefono
-        //cell.sexo.text = pacientes[indexPath.row].sexo
-        //cell.edad.text = pacientes[indexPath.row].edad
-        //cell.foto.image = pacientes[indexPath.row].foto
-        //cell.evaluacion.gradoAfinidad = amigos[indexPath.row].gradoAfinidad
+        if(!(indexPath.row % 2 == 0)){
+            cell.backgroundColor = UIColor.init(red: 0.62, green: 0.84, blue: 0.82, alpha: 0.4)
+        }else{
+            //cell.backgroundColor = UIColor.init(red: 0.79, green: 0.79, blue: 0.79, alpha: 0.3)
+        }
+        
         
         return cell
     }

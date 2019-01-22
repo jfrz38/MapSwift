@@ -238,6 +238,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBAction func tapTotal(sender: UIButton) {
         if(getSueldoTotal){
             getSueldoTotal = false
+            totalSeleccionado = false
             btnTotal.alpha = 0.25
         }else{
             getSueldoTotal = true
@@ -249,6 +250,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBAction func tapMedia(sender: UIButton) {
         if(getSueldoMedio){
             getSueldoMedio = false
+            mediaSeleccionada = false
             btnMedia.alpha = 0.25
         }else{
             getSueldoMedio = true
@@ -263,10 +265,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             return
         }
         
-        if (!comprobarBotones() && mostrarNombreSeleccionado == true){
+        if (!comprobarBotones() && (mediaSeleccionada || totalSeleccionado)){//mostrarNombreSeleccionado == true){
             //Mostrar toda la empresa en un string: No hay búsqueda
-            resultadoBusqueda = empresa
-            tiemposAtributos()
+            //resultadoBusqueda = empresa
+            tiemposAtributos(empresa)
             return
         }else if(!comprobarBotones()){
             //Allert controller
@@ -283,6 +285,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         for _ in 1...10{
             //Tiempo
+            sueldoMedioMap = 0.0
+            sueldoTotalMap = 0.0
             let inicioTiempoMap = NSDate()
             //Búsqueda Map
             let resultadosFinalesMap = busquedaMap()
@@ -304,6 +308,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         for _ in 1...10{
             //Tiempo iterativo
+            sueldoMedioIterativo = 0.0
+            sueldoTotalIterativo = 0.0
             let inicioTiempoIterativo = NSDate()
             //Búsqueda iterativa
             let resultadosFinalesIterar = busquedaBucle()
@@ -322,9 +328,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         print("Tiempo búsqueda medio iterar = ",tiempoMedioIterar)
         
         //Mostrar por nombre
-        if(mostrarNombreSeleccionado){
+        /*if(mostrarNombreSeleccionado){
             tiemposAtributos()
-        }
+        }*/
         
         //print("Resultados iterativo = ",resultadosFinalesIterar.map({$0.nombre}))
         
@@ -353,7 +359,57 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         //print("Resultados map: ",resultadosFinalesMap.map({$0.NIF}))
     }
     
-    func tiemposAtributos(){
+    func tiemposAtributos(resultadosBusqueda: [Persona]){
+        
+        //Mapa
+        var tiempoMedioMap = [Double]()
+        for _ in 1...10{
+            sueldoMedioMap = 0.0
+            sueldoTotalMap = 0.0
+            let inicioTiempoMap = NSDate()
+            sueldoTotalMap = resultadosBusqueda.reduce(0){(sueldoActual,sueldoSiguiente) -> Double in
+                return sueldoActual+sueldoSiguiente.sueldo
+            }
+            if(getSueldoMedio){
+                sueldoMedioMap = sueldoTotalMap/Double(resultadosBusqueda.count)
+            }
+            let finTiempoMap = NSDate()
+            let diferenciaMap = (finTiempoMap.timeIntervalSinceDate(inicioTiempoMap) * 1000)
+            tiempoMedioMap.append(diferenciaMap)
+        }
+        var aux = 0.0
+        for i in tiempoMedioMap{
+            aux+=i
+        }
+        tiempoMedioMapa = aux/Double(tiempoMedioMap.count)
+
+        
+        
+        //Iterativo
+        var tiempoMedioIterativo = [Double]()
+        for _ in 1...10{
+            sueldoMedioIterativo = 0.0
+            sueldoTotalIterativo = 0.0
+            let inicioTiempoIterativo = NSDate()
+            for rb in resultadosBusqueda{
+                sueldoTotalIterativo += rb.sueldo
+            }
+            if(getSueldoMedio){
+                sueldoMedioIterativo = sueldoTotalIterativo/Double(resultadosBusqueda.count)
+            }
+            let finTiempoIterativo = NSDate()
+            let diferenciaIterativa = (finTiempoIterativo.timeIntervalSinceDate(inicioTiempoIterativo) * 1000)
+            tiempoMedioIterativo.append(diferenciaIterativa)
+            
+            aux = 0.0
+            for i in tiempoMedioIterativo{
+                aux+=i
+            }
+            tiempoMedioIterar = aux/Double(tiempoMedioIterativo.count)
+        }
+
+        
+        /*
         //Mapa
         var tiempoMedioStringMap = [Double]()
         for _ in 1...10{
@@ -368,7 +424,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             aux+=i
         }
         tiempoStringMap = aux/Double(tiempoMedioStringMap.count)
-        print("Tiempo medio string map = ",aux/Double(tiempoMedioStringMap.count))
+        //print("Tiempo medio string map = ",aux/Double(tiempoMedioStringMap.count))
         
         //Iterativo
         var tiempoMedioStringIterativo = [Double]()
@@ -390,8 +446,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             aux+=i
         }
         tiempoStringBucle = aux/Double(tiempoMedioStringIterativo.count)
-        print("Tiempo medio string iterativo = ",tiempoStringBucle)
-
+        //print("Tiempo medio string iterativo = ",tiempoStringBucle)
+        */
     }
     
     func comprobarBotones() -> Bool{
@@ -598,6 +654,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
             
         }
+        
         return resultadosBusqueda
     }
     
