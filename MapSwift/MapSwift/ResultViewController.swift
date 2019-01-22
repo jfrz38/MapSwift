@@ -19,10 +19,14 @@ class ResultViewController : UIViewController, UITextFieldDelegate, UIImagePicke
     override func viewDidLoad(){
         super.viewDidLoad()
     
-        if (!mediaSeleccionada){
+        if (mediaSeleccionada == true){
+            sueldoMedioLbl.text = "Sueldo medio = \(sueldoMedioIterativo)"
+        } else {
             sueldoMedioLbl.hidden = true
         }
-        if(!totalSeleccionado){
+        if(totalSeleccionado == true){
+            sueldosTotalesLbl.text = "Sueldos totales = \(sueldoTotalIterativo)"
+        } else {
             sueldosTotalesLbl.hidden = true
         }
         

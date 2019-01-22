@@ -241,6 +241,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             btnTotal.alpha = 0.25
         }else{
             getSueldoTotal = true
+            totalSeleccionado = true
             btnTotal.alpha = 1
         }
     }
@@ -251,6 +252,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             btnMedia.alpha = 0.25
         }else{
             getSueldoMedio = true
+            mediaSeleccionada = true
             btnMedia.alpha = 1
         }
     }
