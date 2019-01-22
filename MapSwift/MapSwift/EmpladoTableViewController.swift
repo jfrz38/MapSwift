@@ -66,16 +66,16 @@ class EmpleadoTableViewController: UITableViewController {
         var numNombreJefe = 1
         var numNombreEmpleado = 1
         var numNombreBecario = 1
-        for _ in 0...4{
+        for _ in 0...100{
             let n = Int(arc4random_uniform(UInt32(101-1))+UInt32(1))
             var p: Persona!
             if(n < 10){
                 //Crear jefe
-                p = Persona(NIF: "NIF"+String(numNif),nombre: "Jefe"+String(numNombreJefe),apellido: "jefazo",sueldo: 2600,puesto: "jefazo",practicas: false)
+                p = Persona(NIF: "NIF"+String(numNif),nombre: "Jefe"+String(numNombreJefe),apellido: "Apellido"+String(numNombreJefe),sueldo: 2600,puesto: "jefazo",practicas: false)
                 numNombreJefe+=1
             }else if(n < 75){
                 //Crear empleado
-                p = Persona(NIF: "NIF"+String(numNif),nombre: "Empleado"+String(numNombreEmpleado),apellido: "currante",sueldo: 1200,puesto: "empleado",practicas: false)
+                p = Persona(NIF: "NIF"+String(numNif),nombre: "Empleado"+String(numNombreEmpleado),apellido: "Apellido"+String(numNombreJefe),sueldo: 1200,puesto: "empleado",practicas: false)
                 //Incrementar o no el contador (para que haya personas que se llamen igual)
                 let r = Int(arc4random_uniform(UInt32(5-1))+UInt32(1))
                 // 25% de que se repita un nombre
@@ -84,7 +84,7 @@ class EmpleadoTableViewController: UITableViewController {
                 }
             }else{
                 //Crear becario
-                p = Persona(NIF: "NIF"+String(numNif),nombre: "Becario"+String(numNombreBecario),apellido: "beca",sueldo: 800,puesto: "becario",practicas: true)
+                p = Persona(NIF: "NIF"+String(numNif),nombre: "Becario"+String(numNombreBecario),apellido: "Apellido"+String(numNombreJefe),sueldo: 800,puesto: "becario",practicas: true)
                 let r = Int(arc4random_uniform(UInt32(5-1))+UInt32(1))
                 // 25% de que se repita un nombre
                 if(r != 1){
@@ -165,7 +165,7 @@ class EmpleadoTableViewController: UITableViewController {
         if(esBecarioPregunta == true){
             esBecarioTexto = "Becario"
         } else {
-            esBecarioTexto = "Empleado"
+            esBecarioTexto = "No becario"
         }
         cell.becarioLbl.text = esBecarioTexto
         cell.puestoLbl.text = empresa[indexPath.row].puesto
