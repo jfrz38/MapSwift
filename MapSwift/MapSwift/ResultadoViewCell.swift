@@ -20,7 +20,7 @@ class ResultadoViewCell: UITableViewCell {
     
     @IBOutlet weak var sueldoResLbl: UILabel!
     
-    @IBOutlet weak var puestoResLbl: UIView!
+    @IBOutlet weak var puestoResLbl: UILabel!
     
     @IBOutlet weak var becarioResLbl: UILabel!
 }
